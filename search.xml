@@ -1,9 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[regression]]></title>
+    <url>%2F2020%2F02%2F01%2Fregression%2F</url>
+    <content type="text"><![CDATA[两个error：bias,varianceWhat to do with large bias?1.Add more features as input2.模型更复杂What to do with large variance?1.更多数据2.增加正则化 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253from statistics import meanimport numpy as npimport randomimport matplotlib.pyplot as pltfrom matplotlib import stylestyle.use('ggplot')def create_dataset(hm,variance,step=2,correlation=False): val = 1 ys = [] for i in range(hm): y = val + random.randrange(-variance,variance) ys.append(y) if correlation and correlation == 'pos': val+=step elif correlation and correlation == 'neg': val-=step xs = [i for i in range(len(ys))] return np.array(xs, dtype=np.float64),np.array(ys,dtype=np.float64)def best_fit_slope_and_intercept(xs,ys): m = (mean(xs)*mean(ys)-mean(xs*ys)) / (mean(xs)*mean(xs)-mean(xs*xs)) b= mean(ys)-m*mean(xs) return m,bdef squared_error(ys_orig,ys_line): return sum((ys_line - ys_orig) * (ys_line - ys_orig))def coefficient_of_determination(ys_orig,ys_line): y_mean_line = [mean(ys_orig) for y in ys_orig] squared_error_regr = sum((ys_line - ys_orig) * (ys_line - ys_orig)) squared_error_y_mean = sum((y_mean_line - ys_orig) * (y_mean_line - ys_orig)) print(squared_error_regr) print(squared_error_y_mean) r_squared = 1 - (squared_error_regr/squared_error_y_mean) return r_squaredxs, ys = create_dataset(40,40,2,correlation='pos')m, b = best_fit_slope_and_intercept(xs,ys)regression_line = [(m*x)+b for x in xs]r_squared = coefficient_of_determination(ys,regression_line)print(r_squared)plt.scatter(xs,ys,color='#003F72', label = 'data')plt.plot(xs, regression_line, label = 'regression line')plt.legend(loc=4)plt.show() R-square：分子是预测数据与原始数据均值之差的平方和，分母是原始数据和均值之差的平方和R-square=0.5288792849075254]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[station]]></title>
+    <url>%2F2020%2F02%2F01%2Fstation%2F</url>
+    <content type="text"><![CDATA[134.加油站解法一：On212345678910111213141516171819202122class Solution &#123;public: int canCompleteCircuit(vector&lt;int&gt;&amp; gas, vector&lt;int&gt;&amp; cost) &#123; for(int i=0;i&lt;gas.size();i++) &#123; int sum=0; int flag=0; if(cost[i]&gt;gas[i])continue; for(int j=i;;j++) &#123; if(j==gas.size())j=0; if(j==i)flag++; //起始结束，i`j两次重合 if(flag==2)return i; //第二次回到原点 sum+=gas[j]-cost[j]; if(sum&lt;0)break; &#125; &#125; return -1; &#125;&#125;; 解法二]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[leetcode1326]]></title>
+    <url>%2F2020%2F01%2F26%2Fleetcode1326%2F</url>
+    <content type="text"><![CDATA[1326.灌溉花园的最少水龙头数目 1234567891011121314151617class Solution &#123;public: int dp[10001]; int INF= 0x3f3f3f3f; //定义为无穷大，意味着无法灌溉 int minTaps(int n, vector&lt;int&gt;&amp; ranges) &#123; memset(dp,INF,sizeof(dp)); dp[0] = 0; for(int i = 0; i &lt; ranges.size(); i++)&#123; int L = max(0,i-ranges[i]); int R = min(n,i+ranges[i]); for(int j = L; j &lt;= R; j++)&#123; dp[j] = min(dp[j],dp[L]+1); // &#125; &#125; return dp[n] == INF ? -1 : dp[n]; &#125;&#125;;]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[github解决端口22不能连接错误 error]]></title>
+    <url>%2F2020%2F01%2F21%2Ferror%2F</url>
+    <content type="text"><![CDATA[报错内容：ssh: connect to host github.com port 22: Connection timed out 解决方法：打开这个文件C:\Program Files\Git\etc\ssh\ssh_config 添加以下内容：Host github.comUser xxxxx@email.comHostname ssh.github.comPreferredAuthentications publickeyIdentityFile ~/.ssh/id_rsaPort 443]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[gragh]]></title>
+    <url>%2F2020%2F01%2F21%2Fgragh%2F</url>
+    <content type="text"><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[linear regression]]></title>
     <url>%2F2020%2F01%2F14%2Fmachine-learning%2F</url>
     <content type="text"><![CDATA[从quandl获取股票数据(Open：开盘价Close：收盘价High：最高价Low：最低价Volume：成交量),留下有用的feature12345678import pandas as pdimport quandldf =quandl.get("WIKI/GOOGL")df =df[['Adj. Open', 'Adj. High', 'Adj. Low', 'Adj. Close', 'Adj. Volume']]df['HL_PCT'] = (df['Adj. High'] - df['Adj. Low']) / df['Adj. Close'] * 100.0df['PCT_change']=(df['Adj. Close'] - df['Adj. Open']) / df['Adj. Open'] * 100.0df = df[['Adj. Close', 'HL_PCT', 'PCT_change', 'Adj. Volume']]print(df.head()) Adj. Close HL_PCT PCT_change Adj. Volume Date2004-08-19 50.322842 8.072956 0.324968 44659000.02004-08-20 54.322689 7.921706 7.227007 22834300.02004-08-23 54.869377 4.049360 -1.227880 18256100.02004-08-24 52.597363 7.657099 -5.726357 15247300.0 fillna() 函数：有一个inplace参数，默认为false，不会对原来dataframe中进行替换，为True时候会修改原来的 1234567forecast_col='Adj.Close'df.fillna(value=-9999,inplace=true)forecast_out = int(math.ceil(0.01 * len(df)))#比如现在有100天的数据，去预测未来一天的x=np.array(df.drop(['lable',1]) #当你要删除某一行或者某一列时，用drop函数，它不改变原有的df中的数据，而是返回另一个dataframe来存放删除后的数据y=np..array(df['labble'])X=preprocessing.scale(X) #特征在[-1,1] Fit(): Method calculates the parameters μ and σ and saves them as internal objects.解释：简单来说，就是求得训练集X的均值啊，方差啊，最大值啊，最小值啊这些训练集X固有的属性。可以理解为一个训练过程 Transform(): Method using these calculated parameters apply the transformation to a particular dataset.解释：在Fit的基础上，进行标准化，降维，归一化等操作（看具体用的是哪个工具，如PCA，StandardScaler等）。 Fit_transform(): joins the fit() and transform() method for transformation of dataset.解释：fit_transform是fit和transform的组合，既包括了训练又包含了转换。 12345678910111213141516171819202122232425262728X_lately = X[-forecast_out:]X_lately=X[-forecast_out:]y = np.array(df['label'])print(len(X), len(y))X_train, X_test, y_train, y_test = model_selection.train_test_split(X, y, test_size=0.2)clf = svm.SVR()#kernel='poly'clf.fit(X_train, y_train)confidence = clf.score(X_test, y_test)forecast_set = clf.predict(X_lately)print(confidence,forecast_set)df['Forecast'] = np.nanlast_date = df.iloc[-1].name #iloc,loc:https://www.jianshu.com/p/f430d4f1b33flast_unix = last_date.timestamp() #转化为时间戳one_day = 86400next_unix = last_unix + one_dayfor i in forecast_set: next_date = datetime.datetime.fromtimestamp(next_unix) next_unix += 86400 df.loc[next_date]= [np.nan for _ in range(len(df.columns)-1)]+[i]df['Adj. Close'].plot()df['Forecast'].plot()plt.legend(loc=4)plt.xlabel('Date')plt.ylabel('Price')plt.show()]]></content>
+      <categories>
+        <category>machine learning</category>
+      </categories>
       <tags>
         <tag>machine learning</tag>
       </tags>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-01-19T06:37:56.289Z</updated>
+  <updated>2020-02-01T07:01:58.492Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,116 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>regression</title>
+    <link href="http://yoursite.com/2020/02/01/regression/"/>
+    <id>http://yoursite.com/2020/02/01/regression/</id>
+    <published>2020-02-01T06:32:13.000Z</published>
+    <updated>2020-02-01T07:01:58.492Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>两个error：bias,variance<br>What to do with large bias?<br>1.Add more features as input<br>2.模型更复杂<br>What to do with large variance?<br><img src="/2020/02/01/regression/1.jpg" alt><br><img src="/2020/02/01/regression/2.jpg" alt><br>1.更多数据<br>2.增加正则化</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> statistics <span class="keyword">import</span> mean</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> style</span><br><span class="line">style.use(<span class="string">'ggplot'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_dataset</span><span class="params">(hm,variance,step=<span class="number">2</span>,correlation=False)</span>:</span></span><br><span class="line">    val = <span class="number">1</span></span><br><span class="line">    ys = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(hm):</span><br><span class="line">        y = val + random.randrange(-variance,variance)</span><br><span class="line">        ys.append(y)</span><br><span class="line">        <span class="keyword">if</span> correlation <span class="keyword">and</span> correlation == <span class="string">'pos'</span>:</span><br><span class="line">            val+=step</span><br><span class="line">        <span class="keyword">elif</span> correlation <span class="keyword">and</span> correlation == <span class="string">'neg'</span>:</span><br><span class="line">            val-=step</span><br><span class="line"></span><br><span class="line">    xs = [i <span class="keyword">for</span> i <span class="keyword">in</span> range(len(ys))]</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> np.array(xs, dtype=np.float64),np.array(ys,dtype=np.float64)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">best_fit_slope_and_intercept</span><span class="params">(xs,ys)</span>:</span></span><br><span class="line">    m = (mean(xs)*mean(ys)-mean(xs*ys)) / (mean(xs)*mean(xs)-mean(xs*xs))</span><br><span class="line">    b= mean(ys)-m*mean(xs)</span><br><span class="line">    <span class="keyword">return</span> m,b</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">squared_error</span><span class="params">(ys_orig,ys_line)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> sum((ys_line - ys_orig) * (ys_line - ys_orig))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">coefficient_of_determination</span><span class="params">(ys_orig,ys_line)</span>:</span></span><br><span class="line">    y_mean_line = [mean(ys_orig) <span class="keyword">for</span> y <span class="keyword">in</span> ys_orig]</span><br><span class="line"></span><br><span class="line">    squared_error_regr = sum((ys_line - ys_orig) * (ys_line - ys_orig))</span><br><span class="line">    squared_error_y_mean = sum((y_mean_line - ys_orig) * (y_mean_line - ys_orig))</span><br><span class="line"></span><br><span class="line">    print(squared_error_regr)</span><br><span class="line">    print(squared_error_y_mean)</span><br><span class="line"></span><br><span class="line">    r_squared = <span class="number">1</span> - (squared_error_regr/squared_error_y_mean)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> r_squared</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">xs, ys = create_dataset(<span class="number">40</span>,<span class="number">40</span>,<span class="number">2</span>,correlation=<span class="string">'pos'</span>)</span><br><span class="line">m, b = best_fit_slope_and_intercept(xs,ys)</span><br><span class="line">regression_line = [(m*x)+b <span class="keyword">for</span> x <span class="keyword">in</span> xs]</span><br><span class="line">r_squared = coefficient_of_determination(ys,regression_line)</span><br><span class="line">print(r_squared)</span><br><span class="line">plt.scatter(xs,ys,color=<span class="string">'#003F72'</span>, label = <span class="string">'data'</span>)</span><br><span class="line">plt.plot(xs, regression_line, label = <span class="string">'regression line'</span>)</span><br><span class="line">plt.legend(loc=<span class="number">4</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure><p>R-square：分子是预测数据与原始数据均值之差的平方和，分母是原始数据和均值之差的平方和<br>R-square=0.5288792849075254<br><img src="/2020/02/01/regression/3.jpg" alt></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>station</title>
+    <link href="http://yoursite.com/2020/02/01/station/"/>
+    <id>http://yoursite.com/2020/02/01/station/</id>
+    <published>2020-02-01T03:36:05.000Z</published>
+    <updated>2020-02-01T06:32:14.159Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>134.加油站<br>解法一：On2<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">canCompleteCircuit</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; gas, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; cost)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;gas.size();i++)</span><br><span class="line">        &#123;</span><br><span class="line">         <span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line">         <span class="keyword">int</span> flag=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span>(cost[i]&gt;gas[i])<span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=i;;j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(j==gas.size())j=<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">if</span>(j==i)flag++;<span class="comment">//起始结束，i`j两次重合</span></span><br><span class="line">                <span class="keyword">if</span>(flag==<span class="number">2</span>)<span class="keyword">return</span> i;   <span class="comment">//第二次回到原点 </span></span><br><span class="line">                sum+=gas[j]-cost[j];</span><br><span class="line">                <span class="keyword">if</span>(sum&lt;<span class="number">0</span>)<span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        </span><br><span class="line">            </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p><p>解法二</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>leetcode1326</title>
+    <link href="http://yoursite.com/2020/01/26/leetcode1326/"/>
+    <id>http://yoursite.com/2020/01/26/leetcode1326/</id>
+    <published>2020-01-26T12:26:26.000Z</published>
+    <updated>2020-01-26T12:35:24.385Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>1326.灌溉花园的最少水龙头数目</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> dp[<span class="number">10001</span>];</span><br><span class="line">    <span class="keyword">int</span> INF= <span class="number">0x3f3f3f3f</span>;    <span class="comment">//定义为无穷大，意味着无法灌溉</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">minTaps</span><span class="params">(<span class="keyword">int</span> n, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; ranges)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">memset</span>(dp,INF,<span class="keyword">sizeof</span>(dp));</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ranges.size(); i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> L = max(<span class="number">0</span>,i-ranges[i]);</span><br><span class="line">            <span class="keyword">int</span> R = min(n,i+ranges[i]);</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = L; j &lt;= R; j++)&#123;</span><br><span class="line">                dp[j] = min(dp[j],dp[L]+<span class="number">1</span>); <span class="comment">//</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n] == INF ? <span class="number">-1</span> : dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>github解决端口22不能连接错误 error</title>
+    <link href="http://yoursite.com/2020/01/21/error/"/>
+    <id>http://yoursite.com/2020/01/21/error/</id>
+    <published>2020-01-21T05:55:03.000Z</published>
+    <updated>2020-02-01T06:32:30.981Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>报错内容：ssh: connect to host github.com port 22: Connection timed out</p><p>解决方法：<br>打开这个文件C:\Program Files\Git\etc\ssh\ssh_config</p><p>添加以下内容：Host github.com<br>User <a href="mailto:xxxxx@email.com" target="_blank" rel="noopener">xxxxx@email.com</a><br>Hostname ssh.github.com<br>PreferredAuthentications publickey<br>IdentityFile ~/.ssh/id_rsa<br>Port 443</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>gragh</title>
+    <link href="http://yoursite.com/2020/01/21/gragh/"/>
+    <id>http://yoursite.com/2020/01/21/gragh/</id>
+    <published>2020-01-21T02:41:25.000Z</published>
+    <updated>2020-01-21T02:41:25.498Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>linear regression</title>
     <link href="http://yoursite.com/2020/01/14/machine-learning/"/>
     <id>http://yoursite.com/2020/01/14/machine-learning/</id>
     <published>2020-01-14T11:54:12.000Z</published>
-    <updated>2020-01-19T06:37:56.289Z</updated>
+    <updated>2020-01-21T06:11:42.234Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>从quandl获取股票数据(Open：开盘价Close：收盘价High：最高价Low：最低价Volume：成交量),留下有用的feature<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> quandl</span><br><span class="line">df =quandl.get(<span class="string">"WIKI/GOOGL"</span>)</span><br><span class="line">df =df[[<span class="string">'Adj. Open'</span>,  <span class="string">'Adj. High'</span>,  <span class="string">'Adj. Low'</span>,  <span class="string">'Adj. Close'</span>, <span class="string">'Adj. Volume'</span>]]</span><br><span class="line">df[<span class="string">'HL_PCT'</span>] = (df[<span class="string">'Adj. High'</span>] - df[<span class="string">'Adj. Low'</span>]) / df[<span class="string">'Adj. Close'</span>] * <span class="number">100.0</span></span><br><span class="line">df[<span class="string">'PCT_change'</span>]=(df[<span class="string">'Adj. Close'</span>] - df[<span class="string">'Adj. Open'</span>]) / df[<span class="string">'Adj. Open'</span>] * <span class="number">100.0</span></span><br><span class="line">df = df[[<span class="string">'Adj. Close'</span>, <span class="string">'HL_PCT'</span>, <span class="string">'PCT_change'</span>, <span class="string">'Adj. Volume'</span>]]</span><br><span class="line">print(df.head())</span><br></pre></td></tr></table></figure></p><pre><code>Adj. Close    HL_PCT  PCT_change  Adj. Volume</code></pre><p>Date<br>2004-08-19   50.322842  8.072956    0.324968   44659000.0<br>2004-08-20   54.322689  7.921706    7.227007   22834300.0<br>2004-08-23   54.869377  4.049360   -1.227880   18256100.0<br>2004-08-24   52.597363  7.657099   -5.726357   15247300.0</p><p>fillna() 函数：有一个inplace参数，默认为false，不会对原来dataframe中进行替换，为True时候会修改原来的</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">forecast_col=<span class="string">'Adj.Close'</span></span><br><span class="line">df.fillna(value=<span class="number">-9999</span>,inplace=true)</span><br><span class="line">forecast_out = int(math.ceil(<span class="number">0.01</span> * len(df)))<span class="comment">#比如现在有100天的数据，去预测未来一天的</span></span><br><span class="line"></span><br><span class="line">x=np.array(df.drop([<span class="string">'lable'</span>,<span class="number">1</span>]) <span class="comment">#当你要删除某一行或者某一列时，用drop函数，它不改变原有的df中的数据，而是返回另一个dataframe来存放删除后的数据</span></span><br><span class="line">y=np..array(df[<span class="string">'labble'</span>])</span><br><span class="line">X=preprocessing.scale(X) <span class="comment">#特征在[-1,1]</span></span><br></pre></td></tr></table></figure><p>Fit(): Method calculates the parameters μ and σ and saves them as internal objects.<br>解释：简单来说，就是求得训练集X的均值啊，方差啊，最大值啊，最小值啊这些训练集X固有的属性。可以理解为一个训练过程</p><p>Transform(): Method using these calculated parameters apply the transformation to a particular dataset.<br>解释：在Fit的基础上，进行标准化，降维，归一化等操作（看具体用的是哪个工具，如PCA，StandardScaler等）。</p><p>Fit_transform(): joins the fit() and transform() method for transformation of dataset.<br>解释：fit_transform是fit和transform的组合，既包括了训练又包含了转换。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">X_lately = X[-forecast_out:]</span><br><span class="line">X_lately=X[-forecast_out:]</span><br><span class="line">y = np.array(df[<span class="string">'label'</span>])</span><br><span class="line">print(len(X), len(y))</span><br><span class="line">X_train, X_test, y_train, y_test = model_selection.train_test_split(X, y, test_size=<span class="number">0.2</span>)</span><br><span class="line">clf = svm.SVR()<span class="comment">#kernel='poly'</span></span><br><span class="line">clf.fit(X_train, y_train)</span><br><span class="line">confidence = clf.score(X_test, y_test)</span><br><span class="line">forecast_set = clf.predict(X_lately)</span><br><span class="line">print(confidence,forecast_set)</span><br><span class="line">df[<span class="string">'Forecast'</span>] = np.nan</span><br><span class="line"></span><br><span class="line">last_date = df.iloc[<span class="number">-1</span>].name  <span class="comment">#iloc,loc:https://www.jianshu.com/p/f430d4f1b33f</span></span><br><span class="line">last_unix = last_date.timestamp() <span class="comment">#转化为时间戳</span></span><br><span class="line">one_day = <span class="number">86400</span></span><br><span class="line">next_unix = last_unix + one_day</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> forecast_set:</span><br><span class="line">    next_date = datetime.datetime.fromtimestamp(next_unix)</span><br><span class="line">    next_unix += <span class="number">86400</span></span><br><span class="line">    df.loc[next_date]= [np.nan <span class="keyword">for</span> _ <span class="keyword">in</span> range(len(df.columns)<span class="number">-1</span>)]+[i]</span><br><span class="line"></span><br><span class="line">df[<span class="string">'Adj. Close'</span>].plot()</span><br><span class="line">df[<span class="string">'Forecast'</span>].plot()</span><br><span class="line">plt.legend(loc=<span class="number">4</span>)</span><br><span class="line">plt.xlabel(<span class="string">'Date'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'Price'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -33,6 +138,8 @@
       
     
     </summary>
+    
+      <category term="machine learning" scheme="http://yoursite.com/categories/machine-learning/"/>
     
     
       <category term="machine learning" scheme="http://yoursite.com/tags/machine-learning/"/>
