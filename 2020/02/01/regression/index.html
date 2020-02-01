@@ -84,19 +84,19 @@
 
 <meta name="description" content="两个error：bias,varianceWhat to do with large bias?1.Add more features as input2.模型更复杂What to do with large variance?1.更多数据2.增加正则化 123456789101112131415161718192021222324252627282930313233343536373839404">
 <meta property="og:type" content="article">
-<meta property="og:title" content="regression">
+<meta property="og:title" content="实现regression">
 <meta property="og:url" content="http://yoursite.com/2020/02/01/regression/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="两个error：bias,varianceWhat to do with large bias?1.Add more features as input2.模型更复杂What to do with large variance?1.更多数据2.增加正则化 123456789101112131415161718192021222324252627282930313233343536373839404">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2020/02/01/regression/1.jpg">
-<meta property="og:image" content="http://yoursite.com/2020/02/01/regression/2.jpg">
-<meta property="og:image" content="http://yoursite.com/2020/02/01/regression/3.jpg">
-<meta property="og:updated_time" content="2020-02-01T07:01:58.492Z">
+<meta property="og:image" content="http://yoursite.com/2020/02/01/regression/1.png">
+<meta property="og:image" content="http://yoursite.com/2020/02/01/regression/2.png">
+<meta property="og:image" content="http://yoursite.com/2020/02/01/regression/3.png">
+<meta property="og:updated_time" content="2020-02-01T07:18:12.872Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="regression">
+<meta name="twitter:title" content="实现regression">
 <meta name="twitter:description" content="两个error：bias,varianceWhat to do with large bias?1.Add more features as input2.模型更复杂What to do with large variance?1.更多数据2.增加正则化 123456789101112131415161718192021222324252627282930313233343536373839404">
-<meta name="twitter:image" content="http://yoursite.com/2020/02/01/regression/1.jpg">
+<meta name="twitter:image" content="http://yoursite.com/2020/02/01/regression/1.png">
 <script>
     (function(){
         if(''){
@@ -142,7 +142,7 @@
 
 
 
-  <title>regression | Hexo</title>
+  <title>实现regression | Hexo</title>
   
 
 
@@ -378,7 +378,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">regression</h1>
+          <h1 class="post-title" itemprop="name headline">实现regression</h1>
         
 
         <div class="post-meta">
@@ -400,6 +400,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/machine-learning/" itemprop="url" rel="index">
+                    <span itemprop="name">machine learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -428,9 +450,9 @@
       
 
       
-        <p>两个error：bias,variance<br>What to do with large bias?<br>1.Add more features as input<br>2.模型更复杂<br>What to do with large variance?<br><img src="/2020/02/01/regression/1.jpg" alt><br><img src="/2020/02/01/regression/2.jpg" alt><br>1.更多数据<br>2.增加正则化</p>
+        <p>两个error：bias,variance<br>What to do with large bias?<br>1.Add more features as input<br>2.模型更复杂<br>What to do with large variance?<br><img src="/2020/02/01/regression/1.png" alt><br><img src="/2020/02/01/regression/2.png" alt><br>1.更多数据<br>2.增加正则化</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> statistics <span class="keyword">import</span> mean</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> style</span><br><span class="line">style.use(<span class="string">'ggplot'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_dataset</span><span class="params">(hm,variance,step=<span class="number">2</span>,correlation=False)</span>:</span></span><br><span class="line">    val = <span class="number">1</span></span><br><span class="line">    ys = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(hm):</span><br><span class="line">        y = val + random.randrange(-variance,variance)</span><br><span class="line">        ys.append(y)</span><br><span class="line">        <span class="keyword">if</span> correlation <span class="keyword">and</span> correlation == <span class="string">'pos'</span>:</span><br><span class="line">            val+=step</span><br><span class="line">        <span class="keyword">elif</span> correlation <span class="keyword">and</span> correlation == <span class="string">'neg'</span>:</span><br><span class="line">            val-=step</span><br><span class="line"></span><br><span class="line">    xs = [i <span class="keyword">for</span> i <span class="keyword">in</span> range(len(ys))]</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> np.array(xs, dtype=np.float64),np.array(ys,dtype=np.float64)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">best_fit_slope_and_intercept</span><span class="params">(xs,ys)</span>:</span></span><br><span class="line">    m = (mean(xs)*mean(ys)-mean(xs*ys)) / (mean(xs)*mean(xs)-mean(xs*xs))</span><br><span class="line">    b= mean(ys)-m*mean(xs)</span><br><span class="line">    <span class="keyword">return</span> m,b</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">squared_error</span><span class="params">(ys_orig,ys_line)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> sum((ys_line - ys_orig) * (ys_line - ys_orig))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">coefficient_of_determination</span><span class="params">(ys_orig,ys_line)</span>:</span></span><br><span class="line">    y_mean_line = [mean(ys_orig) <span class="keyword">for</span> y <span class="keyword">in</span> ys_orig]</span><br><span class="line"></span><br><span class="line">    squared_error_regr = sum((ys_line - ys_orig) * (ys_line - ys_orig))</span><br><span class="line">    squared_error_y_mean = sum((y_mean_line - ys_orig) * (y_mean_line - ys_orig))</span><br><span class="line"></span><br><span class="line">    print(squared_error_regr)</span><br><span class="line">    print(squared_error_y_mean)</span><br><span class="line"></span><br><span class="line">    r_squared = <span class="number">1</span> - (squared_error_regr/squared_error_y_mean)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> r_squared</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">xs, ys = create_dataset(<span class="number">40</span>,<span class="number">40</span>,<span class="number">2</span>,correlation=<span class="string">'pos'</span>)</span><br><span class="line">m, b = best_fit_slope_and_intercept(xs,ys)</span><br><span class="line">regression_line = [(m*x)+b <span class="keyword">for</span> x <span class="keyword">in</span> xs]</span><br><span class="line">r_squared = coefficient_of_determination(ys,regression_line)</span><br><span class="line">print(r_squared)</span><br><span class="line">plt.scatter(xs,ys,color=<span class="string">'#003F72'</span>, label = <span class="string">'data'</span>)</span><br><span class="line">plt.plot(xs, regression_line, label = <span class="string">'regression line'</span>)</span><br><span class="line">plt.legend(loc=<span class="number">4</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p>R-square：分子是预测数据与原始数据均值之差的平方和，分母是原始数据和均值之差的平方和<br>R-square=0.5288792849075254<br><img src="/2020/02/01/regression/3.jpg" alt></p>
+<p>R-square：分子是预测数据与原始数据均值之差的平方和，分母是原始数据和均值之差的平方和<br>R-square=0.5288792849075254<br><img src="/2020/02/01/regression/3.png" alt></p>
 
       
     </div>
