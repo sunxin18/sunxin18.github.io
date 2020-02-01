@@ -9,16 +9,6 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[station]]></title>
-    <url>%2F2020%2F02%2F01%2Fstation%2F</url>
-    <content type="text"><![CDATA[134.加油站解法一：On212345678910111213141516171819202122class Solution &#123;public: int canCompleteCircuit(vector&lt;int&gt;&amp; gas, vector&lt;int&gt;&amp; cost) &#123; for(int i=0;i&lt;gas.size();i++) &#123; int sum=0; int flag=0; if(cost[i]&gt;gas[i])continue; for(int j=i;;j++) &#123; if(j==gas.size())j=0; if(j==i)flag++; //起始结束，i`j两次重合 if(flag==2)return i; //第二次回到原点 sum+=gas[j]-cost[j]; if(sum&lt;0)break; &#125; &#125; return -1; &#125;&#125;; 解法二]]></content>
-  </entry>
-  <entry>
-    <title><![CDATA[leetcode1326]]></title>
-    <url>%2F2020%2F01%2F26%2Fleetcode1326%2F</url>
-    <content type="text"><![CDATA[1326.灌溉花园的最少水龙头数目 1234567891011121314151617class Solution &#123;public: int dp[10001]; int INF= 0x3f3f3f3f; //定义为无穷大，意味着无法灌溉 int minTaps(int n, vector&lt;int&gt;&amp; ranges) &#123; memset(dp,INF,sizeof(dp)); dp[0] = 0; for(int i = 0; i &lt; ranges.size(); i++)&#123; int L = max(0,i-ranges[i]); int R = min(n,i+ranges[i]); for(int j = L; j &lt;= R; j++)&#123; dp[j] = min(dp[j],dp[L]+1); // &#125; &#125; return dp[n] == INF ? -1 : dp[n]; &#125;&#125;;]]></content>
-  </entry>
-  <entry>
     <title><![CDATA[github解决端口22不能连接错误 error]]></title>
     <url>%2F2020%2F01%2F21%2Ferror%2F</url>
     <content type="text"><![CDATA[报错内容：ssh: connect to host github.com port 22: Connection timed out 解决方法：打开这个文件C:\Program Files\Git\etc\ssh\ssh_config 添加以下内容：Host github.comUser xxxxx@email.comHostname ssh.github.comPreferredAuthentications publickeyIdentityFile ~/.ssh/id_rsaPort 443]]></content>
