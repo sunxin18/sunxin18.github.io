@@ -116,9 +116,9 @@
       <category term="机器学习" scheme="https://sunxin18.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="应用" scheme="https://sunxin18.github.io/tags/%E5%BA%94%E7%94%A8/"/>
-    
       <category term="KNN" scheme="https://sunxin18.github.io/tags/KNN/"/>
+    
+      <category term="应用" scheme="https://sunxin18.github.io/tags/%E5%BA%94%E7%94%A8/"/>
     
   </entry>
   
@@ -233,9 +233,9 @@
       <category term="机器学习" scheme="https://sunxin18.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="regression" scheme="https://sunxin18.github.io/tags/regression/"/>
-    
       <category term="应用" scheme="https://sunxin18.github.io/tags/%E5%BA%94%E7%94%A8/"/>
+    
+      <category term="regression" scheme="https://sunxin18.github.io/tags/regression/"/>
     
   </entry>
   
