@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://sunxin18.github.io/"/>
-  <updated>2020-02-04T14:36:47.146Z</updated>
+  <updated>2020-02-05T09:45:09.480Z</updated>
   <id>https://sunxin18.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://sunxin18.github.io/2020/02/04/hashtbale/"/>
     <id>https://sunxin18.github.io/2020/02/04/hashtbale/</id>
     <published>2020-02-04T14:32:43.000Z</published>
-    <updated>2020-02-04T14:36:47.146Z</updated>
+    <updated>2020-02-05T09:45:09.480Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>题目49<br>给定一个字符串数组，将字母异位词组合在一起。字母异位词指字母相同，但排列不同的字符串。</p><p>思路：哈希表，对排序后的单词作为索引。<br><div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">c++</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; groupAnagrams(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; strs) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt;res;</span><br><span class="line">        <span class="built_in">map</span>&lt;<span class="built_in">string</span>,<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt;cur;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> str:strs)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">string</span> s=str;</span><br><span class="line">            sort(s.begin(),s.end());</span><br><span class="line">            cur[s].push_back(str);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it=cur.begin();it!=cur.end();it++)</span><br><span class="line">            res.push_back(it-&gt;second);</span><br><span class="line">       <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></div></p>]]></content>
     
@@ -73,7 +73,7 @@
     <link href="https://sunxin18.github.io/2020/02/03/2-3/"/>
     <id>https://sunxin18.github.io/2020/02/03/2-3/</id>
     <published>2020-02-03T12:34:59.000Z</published>
-    <updated>2020-02-04T14:36:19.274Z</updated>
+    <updated>2020-02-05T09:45:19.510Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>题目402：给定一个以字符串表示的非负整数 num，移除这个数中的 k 位数字，使得剩下的数字最小。<br>测试用例  112,<br>思路要想使移除k个元素后的数最小，则应该移除最靠左的k个相邻逆序对，包括在一次移除后形成的新的逆序对.</p><div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">c++</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">removeKdigits</span><span class="params">(<span class="built_in">string</span> num, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">string</span> res;</span><br><span class="line">        <span class="keyword">int</span> n = num.size(), m = n - k;        </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">char</span> c : num) &#123;</span><br><span class="line">            <span class="keyword">while</span> (k &amp;&amp; res.size() &amp;&amp; res.back() &gt; c) &#123;</span><br><span class="line">                res.pop_back();</span><br><span class="line">                --k;</span><br><span class="line">            &#125;</span><br><span class="line">            res.push_back(c);</span><br><span class="line">        &#125;</span><br><span class="line">        res.resize(m);</span><br><span class="line">        <span class="comment">//去除前导0， 如10200，k = 1</span></span><br><span class="line">        <span class="keyword">while</span> (!res.empty() &amp;&amp; res[<span class="number">0</span>] == <span class="string">'0'</span>) &#123;</span><br><span class="line">            res.erase(res.begin());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res.empty() ? <span class="string">"0"</span> : res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></div>]]></content>
     
@@ -116,9 +116,9 @@
       <category term="机器学习" scheme="https://sunxin18.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="KNN" scheme="https://sunxin18.github.io/tags/KNN/"/>
-    
       <category term="应用" scheme="https://sunxin18.github.io/tags/%E5%BA%94%E7%94%A8/"/>
+    
+      <category term="KNN" scheme="https://sunxin18.github.io/tags/KNN/"/>
     
   </entry>
   
@@ -150,7 +150,7 @@
     <link href="https://sunxin18.github.io/2020/01/26/leetcode1326/"/>
     <id>https://sunxin18.github.io/2020/01/26/leetcode1326/</id>
     <published>2020-01-26T12:26:26.000Z</published>
-    <updated>2020-02-03T04:04:12.005Z</updated>
+    <updated>2020-02-05T09:45:27.300Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>1326.灌溉花园的最少水龙头数目</p><div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">c++</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> dp[<span class="number">10001</span>];</span><br><span class="line">    <span class="keyword">int</span> INF= <span class="number">0x3f3f3f3f</span>;    <span class="comment">//定义为无穷大，意味着无法灌溉</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">minTaps</span><span class="params">(<span class="keyword">int</span> n, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; ranges)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">memset</span>(dp,INF,<span class="keyword">sizeof</span>(dp));</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ranges.size(); i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> L = max(<span class="number">0</span>,i-ranges[i]);</span><br><span class="line">            <span class="keyword">int</span> R = min(n,i+ranges[i]);</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = L; j &lt;= R; j++)&#123;</span><br><span class="line">                dp[j] = min(dp[j],dp[L]+<span class="number">1</span>); <span class="comment">//</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n] == INF ? <span class="number">-1</span> : dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></div>]]></content>
     
@@ -171,11 +171,11 @@
   </entry>
   
   <entry>
-    <title>博客报错总结 error</title>
+    <title>博客报错总结</title>
     <link href="https://sunxin18.github.io/2020/01/21/error/"/>
     <id>https://sunxin18.github.io/2020/01/21/error/</id>
     <published>2020-01-21T05:55:03.000Z</published>
-    <updated>2020-02-05T05:51:53.387Z</updated>
+    <updated>2020-02-05T09:45:01.534Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>github解决端口22不能连接错误<br>报错内容：ssh: connect to host github.com port 22: Connection timed out</p><p>解决方法：<br>打开这个文件C:\Program Files\Git\etc\ssh\ssh_config</p><p>添加以下内容：Host github.com<br>User <a href="mailto:xxxxx@email.com" target="_blank" rel="noopener">xxxxx@email.com</a><br>Hostname ssh.github.com<br>PreferredAuthentications publickey<br>IdentityFile ~/.ssh/id_rsa<br>Port 443</p><p>报错内容： 出现了npm ERR! Error: EPERM: operation not permitted, open ‘C:\Users\Administrator，npm-v显示bash: npm-v: command not found，<br>解决方法： 输入npm install hexo-deployer-git –save。</p>]]></content>
     
@@ -233,9 +233,9 @@
       <category term="机器学习" scheme="https://sunxin18.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="应用" scheme="https://sunxin18.github.io/tags/%E5%BA%94%E7%94%A8/"/>
-    
       <category term="regression" scheme="https://sunxin18.github.io/tags/regression/"/>
+    
+      <category term="应用" scheme="https://sunxin18.github.io/tags/%E5%BA%94%E7%94%A8/"/>
     
   </entry>
   
