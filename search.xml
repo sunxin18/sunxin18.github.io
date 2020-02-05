@@ -67,9 +67,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[github解决端口22不能连接错误 error]]></title>
+    <title><![CDATA[博客报错总结 error]]></title>
     <url>%2F2020%2F01%2F21%2Ferror%2F</url>
-    <content type="text"><![CDATA[报错内容：ssh: connect to host github.com port 22: Connection timed out 解决方法：打开这个文件C:\Program Files\Git\etc\ssh\ssh_config 添加以下内容：Host github.comUser xxxxx@email.comHostname ssh.github.comPreferredAuthentications publickeyIdentityFile ~/.ssh/id_rsaPort 443 报错内容： 出现了npm ERR! Error: EPERM: operation not permitted, open ‘C:\Users\Administrator，npm-v显示bash: npm-v: command not found，解决方法： 输入npm install hexo-deployer-git –save。]]></content>
+    <content type="text"><![CDATA[github解决端口22不能连接错误报错内容：ssh: connect to host github.com port 22: Connection timed out 解决方法：打开这个文件C:\Program Files\Git\etc\ssh\ssh_config 添加以下内容：Host github.comUser xxxxx@email.comHostname ssh.github.comPreferredAuthentications publickeyIdentityFile ~/.ssh/id_rsaPort 443 报错内容： 出现了npm ERR! Error: EPERM: operation not permitted, open ‘C:\Users\Administrator，npm-v显示bash: npm-v: command not found，解决方法： 输入npm install hexo-deployer-git –save。]]></content>
   </entry>
   <entry>
     <title><![CDATA[gragh]]></title>

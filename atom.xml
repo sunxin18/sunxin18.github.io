@@ -171,13 +171,13 @@
   </entry>
   
   <entry>
-    <title>github解决端口22不能连接错误 error</title>
+    <title>博客报错总结 error</title>
     <link href="https://sunxin18.github.io/2020/01/21/error/"/>
     <id>https://sunxin18.github.io/2020/01/21/error/</id>
     <published>2020-01-21T05:55:03.000Z</published>
-    <updated>2020-02-04T03:21:33.827Z</updated>
+    <updated>2020-02-05T05:51:53.387Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>报错内容：ssh: connect to host github.com port 22: Connection timed out</p><p>解决方法：<br>打开这个文件C:\Program Files\Git\etc\ssh\ssh_config</p><p>添加以下内容：Host github.com<br>User <a href="mailto:xxxxx@email.com" target="_blank" rel="noopener">xxxxx@email.com</a><br>Hostname ssh.github.com<br>PreferredAuthentications publickey<br>IdentityFile ~/.ssh/id_rsa<br>Port 443</p><p>报错内容： 出现了npm ERR! Error: EPERM: operation not permitted, open ‘C:\Users\Administrator，npm-v显示bash: npm-v: command not found，<br>解决方法： 输入npm install hexo-deployer-git –save。</p>]]></content>
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>github解决端口22不能连接错误<br>报错内容：ssh: connect to host github.com port 22: Connection timed out</p><p>解决方法：<br>打开这个文件C:\Program Files\Git\etc\ssh\ssh_config</p><p>添加以下内容：Host github.com<br>User <a href="mailto:xxxxx@email.com" target="_blank" rel="noopener">xxxxx@email.com</a><br>Hostname ssh.github.com<br>PreferredAuthentications publickey<br>IdentityFile ~/.ssh/id_rsa<br>Port 443</p><p>报错内容： 出现了npm ERR! Error: EPERM: operation not permitted, open ‘C:\Users\Administrator，npm-v显示bash: npm-v: command not found，<br>解决方法： 输入npm install hexo-deployer-git –save。</p>]]></content>
     
     <summary type="html">
     
