@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[python_counter]]></title>
-    <url>%2F2020%2F02%2F06%2Fpython-counter%2F</url>
-    <content type="text"><![CDATA[]]></content>
+    <title><![CDATA[gragh representation learning(图的表征学习)]]></title>
+    <url>%2F2020%2F02%2F06%2Frepresentation-learning%2F</url>
+    <content type="text"><![CDATA[核心思想：map each node in a network into a low-dimensional space把每个节点映射到低维空间 Embedding Nodesnode embedding的目标是在原网络的similarity近似于embedding space的相似度（内积）1.定义一个encoder(i.e., a mapping from nodes to embeddings)2.定义相似度函数（原始网络中的相似度）3.优化encoder的参数，使得原始网络中u，v的相似度近似于embedding的点积 deep walkgiven a graph and a starting point, we select a neighbor of it at random, and move to this neighbor; then we select a neighbor of this point at random, and move to it, etc. The (random) sequence of points selected this way is a random walk on the graph. So $similarity(u,v)$ is defined as the probability thatu and v co-occur on a random walk over a network. random-walk embeddings有如下几步：1.Estimate probability of visiting node v on a random walk starting from node u using some random walk strategy R. The simplest idea is just to run fixed-length, unbiased random walks starting from each node i.e., DeepWalk from Perozzi et al., 20132.Optimize embeddings to encode these random walk statistics, so the similarity between embeddings (e.g., dot product) encodes Random Walk similarity. Random walk optimization and Negative Sampling]]></content>
+      <categories>
+        <category>图</category>
+      </categories>
+      <tags>
+        <tag>embedding</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[hashtbale]]></title>
