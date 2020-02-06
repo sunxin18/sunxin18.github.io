@@ -3,12 +3,13 @@
   <entry>
     <title><![CDATA[gragh representation learning(图的表征学习)]]></title>
     <url>%2F2020%2F02%2F06%2Frepresentation-learning%2F</url>
-    <content type="text"><![CDATA[核心思想：map each node in a network into a low-dimensional space把每个节点映射到低维空间 Embedding Nodesnode embedding的目标是在原网络的similarity近似于embedding space的相似度（内积）1.定义一个encoder(i.e., a mapping from nodes to embeddings)2.定义相似度函数（原始网络中的相似度）3.优化encoder的参数，使得原始网络中u，v的相似度近似于embedding的点积 deep walkgiven a graph and a starting point, we select a neighbor of it at random, and move to this neighbor; then we select a neighbor of this point at random, and move to it, etc. The (random) sequence of points selected this way is a random walk on the graph. So $similarity(u,v)$ is defined as the probability thatu and v co-occur on a random walk over a network. random-walk embeddings有如下几步：1.Estimate probability of visiting node v on a random walk starting from node u using some random walk strategy R. The simplest idea is just to run fixed-length, unbiased random walks starting from each node i.e., DeepWalk from Perozzi et al., 20132.Optimize embeddings to encode these random walk statistics, so the similarity between embeddings (e.g., dot product) encodes Random Walk similarity. Random walk optimization and Negative Sampling]]></content>
+    <content type="text"><![CDATA[核心思想：map each node in a network into a low-dimensional space把每个节点映射到低维空间 Embedding Nodesnode embedding的目标是在原网络的similarity近似于embedding space的相似度（内积）1.定义一个encoder(i.e., a mapping from nodes to embeddings)2.定义相似度函数（原始网络中的相似度）3.优化encoder的参数，使得原始网络中u，v的相似度近似于embedding的点积 deep walkgiven a graph and a starting point, we select a neighbor of it at random, and move to this neighbor; then we select a neighbor of this point at random, and move to it, etc. The (random) sequence of points selected this way is a random walk on the graph. So $similarity(u,v)$ is defined as the probability thatu and v co-occur on a random walk over a network. 思想来源于语言模型，我们想要在所有训练短语中最大化概率$Pr(w_{n}|w_{0},w_{1},….,w_{n-1})$，The direct analog is to estimate the likelihood of observing vertex vi given all the previous vertices visited so far in the random walk. random-walk embeddings有如下几步：1.Estimate probability of visiting node v on a random walk starting from node u using some random walk strategy R. The simplest idea is just to run fixed-length, unbiased random walks starting from each node i.e., DeepWalk from Perozzi et al., 20132.Optimize embeddings to encode these random walk statistics, so the similarity between embeddings (e.g., dot product) encodes Random Walk similarity. Random walk optimization and Negative Sampling]]></content>
       <categories>
         <category>图</category>
       </categories>
       <tags>
         <tag>embedding</tag>
+        <tag>负采样</tag>
       </tags>
   </entry>
   <entry>
@@ -75,8 +76,11 @@
     <url>%2F2020%2F02%2F01%2Fregression%2F</url>
     <content type="text"><![CDATA[两个error：bias,varianceWhat to do with large bias?1.Add more features as input2.模型更复杂What to do with large variance?1.更多数据2.增加正则化 python1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253from statistics import meanimport numpy as npimport randomimport matplotlib.pyplot as pltfrom matplotlib import stylestyle.use('ggplot')def create_dataset(hm,variance,step=2,correlation=False): val = 1 ys = [] for i in range(hm): y = val + random.randrange(-variance,variance) ys.append(y) if correlation and correlation == 'pos': val+=step elif correlation and correlation == 'neg': val-=step xs = [i for i in range(len(ys))] return np.array(xs, dtype=np.float64),np.array(ys,dtype=np.float64)def best_fit_slope_and_intercept(xs,ys): m = (mean(xs)*mean(ys)-mean(xs*ys)) / (mean(xs)*mean(xs)-mean(xs*xs)) b= mean(ys)-m*mean(xs) return m,bdef squared_error(ys_orig,ys_line): return sum((ys_line - ys_orig) * (ys_line - ys_orig))def coefficient_of_determination(ys_orig,ys_line): y_mean_line = [mean(ys_orig) for y in ys_orig] squared_error_regr = sum((ys_line - ys_orig) * (ys_line - ys_orig)) squared_error_y_mean = sum((y_mean_line - ys_orig) * (y_mean_line - ys_orig)) print(squared_error_regr) print(squared_error_y_mean) r_squared = 1 - (squared_error_regr/squared_error_y_mean) return r_squaredxs, ys = create_dataset(40,40,2,correlation='pos')m, b = best_fit_slope_and_intercept(xs,ys)regression_line = [(m*x)+b for x in xs]r_squared = coefficient_of_determination(ys,regression_line)print(r_squared)plt.scatter(xs,ys,color='#003F72', label = 'data')plt.plot(xs, regression_line, label = 'regression line')plt.legend(loc=4)plt.show() R-square：分子是预测数据与原始数据均值之差的平方和，分母是原始数据和均值之差的平方和R-square=0.5288792849075254]]></content>
       <categories>
-        <category>machine learning</category>
+        <category>机器学习</category>
       </categories>
+      <tags>
+        <tag>线性回归</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[中国加油！]]></title>
@@ -112,8 +116,8 @@
         <category>机器学习</category>
       </categories>
       <tags>
-        <tag>应用</tag>
         <tag>regression</tag>
+        <tag>应用</tag>
       </tags>
   </entry>
   <entry>
