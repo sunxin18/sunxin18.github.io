@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://sunxin18.github.io/"/>
-  <updated>2020-02-05T12:57:39.401Z</updated>
+  <updated>2020-02-06T06:23:37.539Z</updated>
   <id>https://sunxin18.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>python_counter</title>
+    <link href="https://sunxin18.github.io/2020/02/06/python-counter/"/>
+    <id>https://sunxin18.github.io/2020/02/06/python-counter/</id>
+    <published>2020-02-06T06:23:37.000Z</published>
+    <updated>2020-02-06T06:23:37.539Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>hashtbale</title>
@@ -99,8 +120,8 @@
     <title>knn应用（癌症判断）</title>
     <link href="https://sunxin18.github.io/2020/02/03/knn/"/>
     <id>https://sunxin18.github.io/2020/02/03/knn/</id>
-    <published>2020-02-03T03:54:50.000Z</published>
-    <updated>2020-02-04T14:26:00.275Z</updated>
+    <published>2020-02-03T07:54:50.000Z</published>
+    <updated>2020-02-06T06:43:37.230Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a href="https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Original%29" target="_blank" rel="noopener">癌症数据</a><br><a href="https://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/" target="_blank" rel="noopener">下载链接</a></p><p>为数据添加label，在第一行加入id,clump_thickness,uniform_cell_size,<br>uniform_cell_shape,marginal_adhesion,<br>single_epi_cell_size,bare_nuclei,bland_chromation,<br>normal_nucleoli,mitoses,class</p><p>数据样式：<br>   clumb_thickness  unif_cell_size  unif_cell_shape  marg_adhesion  single_epith_cell_size bare_nuclei  bland_chrom  norm_nucleoli  mitoses  class<br>0                5               1                1              1                       2           1            3              1        1      2<br>1                5               4                4              5                       7          10            3              2        1      2<br>2                3               1                1              1                       2           2            3              1        1      2<br>3                6               8                8              1                       3           4            3              7        1      2<br>4                4               1                1              3                       2           1            3              1        1      2</p><div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">python</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> preprocessing ,model_selection,neighbors</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">df = pd.read_csv(<span class="string">'breast-cancer-wisconsin.txt'</span>)<span class="comment">#encoding='utf-8',header=None,sep = '\t'</span></span><br><span class="line">df.replace(<span class="string">'?'</span>,<span class="number">-99999</span>, inplace=<span class="keyword">True</span>)</span><br><span class="line"><span class="comment">#print([column for column in df])</span></span><br><span class="line">df.drop([<span class="string">'id'</span>], <span class="number">1</span>, inplace=<span class="keyword">True</span>)  <span class="comment">#df.drop returns a new dataframe with our chosen column(s) dropped.</span></span><br><span class="line"><span class="comment">#df=df.iloc[:,1:]#.iloc使用全是以0开头的行号和列号，不能直接用其它索引哦。而.loc使用的实际设置的索引和列名。 这就是.loc和.iloc的区别。在实际运用中，我还发现一点区别，.iloc只能选取数据表里实际有的行和列，而.loc可以选取没有的行和列，赋值后就可以添加新行或者列。</span></span><br><span class="line">X = np.array(df.drop([<span class="string">'class'</span>],<span class="number">1</span>))</span><br><span class="line">y = np.array(df[<span class="string">'class'</span>])</span><br><span class="line"></span><br><span class="line">X_train, X_test, y_train, y_test = model_selection.train_test_split(X, y, test_size=<span class="number">0.2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#print([column for column in df])</span></span><br><span class="line"><span class="comment">#clf = LinearRegression(n_jobs=-1)#SVM.svr() kernel='poly'</span></span><br><span class="line">clf = neighbors.KNeighborsClassifier()</span><br><span class="line">clf.fit(X_train,y_train)</span><br><span class="line"></span><br><span class="line">accuracy = clf.score(X_test,y_test)</span><br><span class="line">print(accuracy)</span><br><span class="line">print(df.head())</span><br><span class="line"></span><br><span class="line"><span class="comment">#example_measures = np.array([4,2,1,1,1,2,3,2,1])  #一个sample</span></span><br><span class="line"><span class="comment">#example_measures = example_measures.reshape(1, -1)  #Reshape your data either using array.reshape(-1, 1) if your data has a single feature or array.reshape(1, -1) if it contains a single sample</span></span><br><span class="line">example_measures = np.array([[<span class="number">4</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>],[<span class="number">4</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>]])<span class="comment">#测试用例</span></span><br><span class="line">example_measures = example_measures.reshape(len(example_measures), <span class="number">-1</span>)</span><br><span class="line">prediction = clf.predict(example_measures)</span><br><span class="line"></span><br><span class="line">print(prediction)</span><br></pre></td></tr></table></figure></div><p>accuracy:0.9714285714285714<br>预测结果：prediction[2 2]</p>]]></content>
     
@@ -123,6 +144,33 @@
   </entry>
   
   <entry>
+    <title>knn_application</title>
+    <link href="https://sunxin18.github.io/2020/02/03/knn-application/"/>
+    <id>https://sunxin18.github.io/2020/02/03/knn-application/</id>
+    <published>2020-02-03T06:18:05.000Z</published>
+    <updated>2020-02-06T06:43:29.930Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>python counter类:<br><div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">python</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = <span class="string">"hello pinsily"</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d = Counter(s)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d</span><br><span class="line">Counter(&#123;<span class="string">'l'</span>: <span class="number">3</span>, <span class="string">'i'</span>: <span class="number">2</span>, <span class="string">'h'</span>: <span class="number">1</span>, <span class="string">'e'</span>: <span class="number">1</span>, <span class="string">'o'</span>: <span class="number">1</span>, <span class="string">' '</span>: <span class="number">1</span>, <span class="string">'p'</span>: <span class="number">1</span>, <span class="string">'n'</span>: <span class="number">1</span>, <span class="string">'s'</span>: <span class="number">1</span>, <span class="string">'y'</span>: <span class="number">1</span>&#125;)</span><br></pre></td></tr></table></figure></div></p><p>most_common(n)<br>返回数量最多的前 n 个元素<br><div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">python</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>d.most_common(<span class="number">3</span>)</span><br><span class="line">[(<span class="string">'l'</span>, <span class="number">3</span>), (<span class="string">'i'</span>, <span class="number">2</span>), (<span class="string">'h'</span>, <span class="number">1</span>)]</span><br></pre></td></tr></table></figure></div></p><p>代码实现：<br><div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">python</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np </span><br><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sqrt</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> warnings</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> style</span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line">style.use(<span class="string">'fivethirtyeight'</span>)</span><br><span class="line">dataset = &#123;<span class="string">'k'</span>:[[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">2</span>,<span class="number">3</span>],[<span class="number">3</span>,<span class="number">1</span>]], <span class="string">'r'</span>:[[<span class="number">6</span>,<span class="number">5</span>],[<span class="number">7</span>,<span class="number">7</span>],[<span class="number">8</span>,<span class="number">6</span>]]&#125;</span><br><span class="line">new_features = [<span class="number">5</span>,<span class="number">7</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> dataset:</span><br><span class="line">    <span class="keyword">for</span> ii <span class="keyword">in</span> dataset[i]:</span><br><span class="line">        plt.scatter(ii[<span class="number">0</span>],ii[<span class="number">1</span>],s=<span class="number">100</span>,color=i)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">k_nearest_neighbors</span><span class="params">(data, predict, k=<span class="number">3</span>)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> len(data) &gt;= k:</span><br><span class="line">        warnings.warn(<span class="string">'K is set to a value less than total voting groups!'</span>)</span><br><span class="line">        </span><br><span class="line">    distances = []</span><br><span class="line">    <span class="keyword">for</span> group <span class="keyword">in</span> data:</span><br><span class="line">        <span class="keyword">for</span> features <span class="keyword">in</span> data[group]:</span><br><span class="line">            euclidean_distance = np.linalg.norm(np.array(features)-np.array(predict))  <span class="comment">#欧几里得距离</span></span><br><span class="line">            distances.append([euclidean_distance,group])</span><br><span class="line"></span><br><span class="line">    votes = [i[<span class="number">1</span>] <span class="keyword">for</span> i <span class="keyword">in</span> sorted(distances)[:k]]</span><br><span class="line">    vote_result = Counter(votes).most_common(<span class="number">1</span>)[<span class="number">0</span>][<span class="number">0</span>] <span class="comment">#不使用[0][0],得到的是[('r', 3)]. [0][0]得到元组中第一个元素</span></span><br><span class="line">    <span class="keyword">return</span> vote_result</span><br><span class="line"></span><br><span class="line">result = k_nearest_neighbors(dataset,new_features,k=<span class="number">3</span>)</span><br><span class="line">print(result)</span><br><span class="line">plt.scatter(new_features[<span class="number">0</span>],new_features[<span class="number">1</span>],s=<span class="number">50</span>,color=result)<span class="comment">#预测的数据用小红点表示</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure></div></p><p>运行结果：<br><a href="/2020/02/03/knn-application/1.png" data-fancybox="group" data-caption class="fancybox"><img src="/2020/02/03/knn-application/1.png" alt title></a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+      
+    
+    </summary>
+    
+      <category term="机器学习" scheme="https://sunxin18.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="KNN" scheme="https://sunxin18.github.io/tags/KNN/"/>
+    
+      <category term="python" scheme="https://sunxin18.github.io/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
     <title>实现regression</title>
     <link href="https://sunxin18.github.io/2020/02/01/regression/"/>
     <id>https://sunxin18.github.io/2020/02/01/regression/</id>
@@ -141,6 +189,27 @@
     </summary>
     
       <category term="machine learning" scheme="https://sunxin18.github.io/categories/machine-learning/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>中国加油！</title>
+    <link href="https://sunxin18.github.io/2020/01/28/china/"/>
+    <id>https://sunxin18.github.io/2020/01/28/china/</id>
+    <published>2020-01-28T05:58:55.000Z</published>
+    <updated>2020-02-06T06:35:16.906Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>时代的一粒灰，落在个人头上，就是一座山。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+      
+    
+    </summary>
     
     
   </entry>

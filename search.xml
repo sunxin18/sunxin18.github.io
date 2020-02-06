@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[python_counter]]></title>
+    <url>%2F2020%2F02%2F06%2Fpython-counter%2F</url>
+    <content type="text"><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[hashtbale]]></title>
     <url>%2F2020%2F02%2F04%2Fhashtbale%2F</url>
     <content type="text"><![CDATA[题目49给定一个字符串数组，将字母异位词组合在一起。字母异位词指字母相同，但排列不同的字符串。 思路：哈希表，对排序后的单词作为索引。c++12345678910111213141516class Solution &#123;public: vector&lt;vector&lt;string&gt;&gt; groupAnagrams(vector&lt;string&gt;&amp; strs) &#123; vector&lt;vector&lt;string&gt;&gt;res; map&lt;string,vector&lt;string&gt;&gt;cur; for(auto str:strs) &#123; string s=str; sort(s.begin(),s.end()); cur[s].push_back(str); &#125; for(auto it=cur.begin();it!=cur.end();it++) res.push_back(it-&gt;second); return res; &#125;&#125;;]]></content>
@@ -48,12 +53,29 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[knn_application]]></title>
+    <url>%2F2020%2F02%2F03%2Fknn-application%2F</url>
+    <content type="text"><![CDATA[python counter类:python12345&gt;&gt;&gt; from collections import Counter&gt;&gt;&gt; s = "hello pinsily"&gt;&gt;&gt; d = Counter(s)&gt;&gt;&gt; dCounter(&#123;'l': 3, 'i': 2, 'h': 1, 'e': 1, 'o': 1, ' ': 1, 'p': 1, 'n': 1, 's': 1, 'y': 1&#125;) most_common(n)返回数量最多的前 n 个元素python12&gt;&gt;&gt; d.most_common(3)[('l', 3), ('i', 2), ('h', 1)] 代码实现：python12345678910111213141516171819202122232425262728293031import numpy as np from math import sqrtimport matplotlib.pyplot as pltimport warningsfrom matplotlib import stylefrom collections import Counterstyle.use('fivethirtyeight')dataset = &#123;'k':[[1,2],[2,3],[3,1]], 'r':[[6,5],[7,7],[8,6]]&#125;new_features = [5,7]for i in dataset: for ii in dataset[i]: plt.scatter(ii[0],ii[1],s=100,color=i)def k_nearest_neighbors(data, predict, k=3): if len(data) &gt;= k: warnings.warn('K is set to a value less than total voting groups!') distances = [] for group in data: for features in data[group]: euclidean_distance = np.linalg.norm(np.array(features)-np.array(predict)) #欧几里得距离 distances.append([euclidean_distance,group]) votes = [i[1] for i in sorted(distances)[:k]] vote_result = Counter(votes).most_common(1)[0][0] #不使用[0][0],得到的是[('r', 3)]. [0][0]得到元组中第一个元素 return vote_resultresult = k_nearest_neighbors(dataset,new_features,k=3)print(result)plt.scatter(new_features[0],new_features[1],s=50,color=result)#预测的数据用小红点表示plt.show() 运行结果：]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>KNN</tag>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[实现regression]]></title>
     <url>%2F2020%2F02%2F01%2Fregression%2F</url>
     <content type="text"><![CDATA[两个error：bias,varianceWhat to do with large bias?1.Add more features as input2.模型更复杂What to do with large variance?1.更多数据2.增加正则化 python1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253from statistics import meanimport numpy as npimport randomimport matplotlib.pyplot as pltfrom matplotlib import stylestyle.use('ggplot')def create_dataset(hm,variance,step=2,correlation=False): val = 1 ys = [] for i in range(hm): y = val + random.randrange(-variance,variance) ys.append(y) if correlation and correlation == 'pos': val+=step elif correlation and correlation == 'neg': val-=step xs = [i for i in range(len(ys))] return np.array(xs, dtype=np.float64),np.array(ys,dtype=np.float64)def best_fit_slope_and_intercept(xs,ys): m = (mean(xs)*mean(ys)-mean(xs*ys)) / (mean(xs)*mean(xs)-mean(xs*xs)) b= mean(ys)-m*mean(xs) return m,bdef squared_error(ys_orig,ys_line): return sum((ys_line - ys_orig) * (ys_line - ys_orig))def coefficient_of_determination(ys_orig,ys_line): y_mean_line = [mean(ys_orig) for y in ys_orig] squared_error_regr = sum((ys_line - ys_orig) * (ys_line - ys_orig)) squared_error_y_mean = sum((y_mean_line - ys_orig) * (y_mean_line - ys_orig)) print(squared_error_regr) print(squared_error_y_mean) r_squared = 1 - (squared_error_regr/squared_error_y_mean) return r_squaredxs, ys = create_dataset(40,40,2,correlation='pos')m, b = best_fit_slope_and_intercept(xs,ys)regression_line = [(m*x)+b for x in xs]r_squared = coefficient_of_determination(ys,regression_line)print(r_squared)plt.scatter(xs,ys,color='#003F72', label = 'data')plt.plot(xs, regression_line, label = 'regression line')plt.legend(loc=4)plt.show() R-square：分子是预测数据与原始数据均值之差的平方和，分母是原始数据和均值之差的平方和R-square=0.5288792849075254]]></content>
       <categories>
         <category>machine learning</category>
       </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[中国加油！]]></title>
+    <url>%2F2020%2F01%2F28%2Fchina%2F</url>
+    <content type="text"><![CDATA[时代的一粒灰，落在个人头上，就是一座山。]]></content>
   </entry>
   <entry>
     <title><![CDATA[leetcode1326]]></title>
