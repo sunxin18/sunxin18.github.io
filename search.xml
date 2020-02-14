@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[leetcode207]]></title>
+    <url>%2F2020%2F02%2F13%2Fleetcode207%2F</url>
+    <content type="text"><![CDATA[207.课程表这道题等价于判断图里有没有环，两种方法一个是拓扑排序，一个是DFS 拓扑排序c++1234567891011121314151617181920212223242526272829303132class Solution &#123;public: bool canFinish(int numCourses, vector&lt;vector&lt;int&gt;&gt;&amp; prerequisites) &#123; vector&lt;int&gt; degree(numCourses, 0); // map&lt;int,int&gt;degree;for(int i=0;i&lt;numCourses;i++)degree[i]=0; map&lt;int,vector&lt;int&gt;&gt;cur; queue&lt;int&gt;q; for(int i=0;i&lt;prerequisites.size();i++)&#123; cur[prerequisites[i][1]].push_back(prerequisites[i][0]); degree[prerequisites[i][0]]++; &#125; for(int i=0;i&lt;degree.size();i++) //不是cur.size() &#123; if(degree[i]==0) q.push(i); &#125; int ans=0; while(!q.empty()) &#123; int node=q.front(); q.pop(); ans++; for(int i=0;i&lt;cur[node].size();i++) &#123; degree[cur[node][i]]--; if(degree[cur[node][i]]==0) q.push(cur[node][i]); &#125; &#125; if(ans==numCourses)return true; else return false; &#125;&#125;; 在这里我犯了一个错误，找了半天…啊我的时间都去哪了….对于入度容器我开始设计是C++ map&lt;int,vector&lt;int&gt;&gt;cur这样没有考虑度为0的节点，首先默认节点入度都为0，然后根据图来更新入度，这种情况可以就地改进见注释，或者直接用vector初始化]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[deep_learning]]></title>
     <url>%2F2020%2F02%2F13%2Fdeep-learning%2F</url>
-    <content type="text"><![CDATA[激活函数（Activation functions）如果不使用激活函数，无论神经网络多少层都会是个线性激活函数除了二分类问题，不要使用sigmoid，tanh变现总是更好，但这些函数当z很大时，梯度会很小，训练会很慢，所以推荐relu函数。ReLu函数只要$z$是正值的情况下，导数恒等于1，当是$z$负值的时候，导数恒等于0。从实际上来说，当使用的导数时，$z$=0的导数是没有定义的。但是当编程实现的时候，$z$的取值刚好等于0.00000001，这个值相当小，所以，在实践中，不需要担心这个值，$z$是等于0的时候，假设一个导数是1或者0效果都可以。这里也有另一个版本的Relu被称为Leaky Relu,这个函数通常比Relu激活函数效果要好，尽管在实际中Leaky ReLu使用的并不多.对于sigmoid函数$g(z)=\frac{1}{1+e^{-x}}$,他的导数等于$g(z)\times (1-g(z))$对于tanh函数$\frac{e^{x}-e^{-x}}{e^{x}+e^{-x}}$,他的导数等于$1-(tanh(z))^{2}$Relu函数$g(z)=max(0,z)$,leaky Relu函数$g(z)=max(0.01z,z)$ #矩阵的维数比如图中的神经网络，第一个隐藏层$z^{[1]}=w^{[1]}x+b^{[1]}$,$z^{[1]}$是3×1的矩阵，$x$是2×1的矩阵，所以$w^{[1]}$是3×2的，总结起来就是$w^{[L]}$是$n^{[L]}\timesn^{[L-1]}$的，对$dw$也是一样的，$b^{[L]}$就是$n^{[L]}\times1$的，见图片右半部分之后可以将$z^{[1]}$叠加起来，m为样本数量 #参数随机初始化（Random+Initialization）$W^{[1]}=np.random.rando(2,2)*0.01,b=np.zeros((2,1))$为什么是0.01，而不是100或者1000。我们通常倾向于初始化为很小的随机数。因为如果你用tanh或者sigmoid激活函数，或者说只在输出层有一个Sigmoid，如果$W$很大，$Z$就会很大或者很小，因此这种情况下你很可能停在tanh/sigmoid函数的平坦的地方(见图3.8.2)，这些地方梯度很小也就意味着梯度下降会很慢，因此学习也就很慢。]]></content>
+    <content type="text"><![CDATA[激活函数（Activation functions）如果不使用激活函数，无论神经网络多少层都会是个线性激活函数除了二分类问题，不要使用sigmoid，tanh变现总是更好，但这些函数当z很大时，梯度会很小，训练会很慢，所以推荐relu函数。ReLu函数只要$z$是正值的情况下，导数恒等于1，当是$z$负值的时候，导数恒等于0。从实际上来说，当使用的导数时，$z$=0的导数是没有定义的。但是当编程实现的时候，$z$的取值刚好等于0.00000001，这个值相当小，所以，在实践中，不需要担心这个值，$z$是等于0的时候，假设一个导数是1或者0效果都可以。这里也有另一个版本的Relu被称为Leaky Relu,这个函数通常比Relu激活函数效果要好，尽管在实际中Leaky ReLu使用的并不多.对于sigmoid函数$g(z)=\frac{1}{1+e^{-x}}$,他的导数等于$g(z)\times (1-g(z))$对于tanh函数$\frac{e^{x}-e^{-x}}{e^{x}+e^{-x}}$,他的导数等于$1-(tanh(z))^{2}$Relu函数$g(z)=max(0,z)$,leaky Relu函数$g(z)=max(0.01z,z)$ 矩阵的维数比如图中的神经网络，第一个隐藏层$z^{[1]}=w^{[1]}x+b^{[1]}$,$z^{[1]}$是3×1的矩阵，$x$是2×1的矩阵，所以$w^{[1]}$是3×2的，总结起来就是$w^{[L]}$是$n^{[L]}\times n^{[L-1]}$的，对$dw$也是一样的，$b^{[L]}$就是$n^{[L]}\times1$的，见图片右半部分之后可以将$z^{[1]}$叠加起来，m为样本数量 参数随机初始化（Random+Initialization）$W^{[1]}=np.random.rando(2,2)*0.01,b=np.zeros((2,1))$为什么是0.01，而不是100或者1000。我们通常倾向于初始化为很小的随机数。因为如果你用tanh或者sigmoid激活函数，或者说只在输出层有一个Sigmoid，如果$W$很大，$Z$就会很大或者很小，因此这种情况下你很可能停在tanh/sigmoid函数的平坦的地方(见图3.8.2)，这些地方梯度很小也就意味着梯度下降会很慢，因此学习也就很慢。 正则化为什么只正则化参数$w$？为什么不再加上参数$b$呢？你可以这么做，只是我习惯省略不写，因为通常是一个高维参数矢量，已经可以表达高偏差问题，可能包含有很多参数，我们不可能拟合所有参数，而$b$只是单个数字，所以$w$几乎涵盖所有参数，而不是$b$，如果加了参数$b$，其实也没太大影响，因为只是众多参数中的一个，所以我通常省略不计，如果你想加上这个参数，完全没问题。]]></content>
       <categories>
         <category>深度学习</category>
       </categories>
@@ -23,7 +28,7 @@
   <entry>
     <title><![CDATA[Pagerank]]></title>
     <url>%2F2020%2F02%2F07%2Fpagerank%2F</url>
-    <content type="text"><![CDATA[The web as a graphpagerank是谷歌用来计算网页重要性的算法，我们把网页想象成节点，超链接想象成边，这就形成了一张有向图。当然我们只考虑静态网页，不考虑防火墙拦截、无法访问这些情况。 两种有向图：1.强连通图Strongly connected graphs：任意节点可以到达任意节点。2.有向无环图Directed Acyclic Graph (DAG):首先没有环，u能达到v，但v不能达到u。求strongly connected components (SCCs):对给定节点分别求入度和出度的BFS,然后对两个集合求交集 Bowtie structure of the web graphBroder et al. (1999) took a large snapshot of the web and tried to understand how the SCCs in the web graph fit together as a DAG这张图Here the starting nodes are sorted by the number of nodes that BFS visits when starting from that node图中蓝色节点只能访问一小部分节点，紫红色节点可以访问很多节点通过这个我们可以得出网络中的图组成 PageRank - Ranking nodes on the graph核心想法是吧links当作votes，一个节点的重要性是又被所指向的其他节点决定的]]></content>
+    <content type="text"><![CDATA[The web as a graphpagerank是谷歌用来计算网页重要性的算法，我们把网页想象成节点，超链接想象成边，这就形成了一张有向图。当然我们只考虑静态网页，不考虑防火墙拦截、无法访问这些情况。 两种有向图：1.强连通图Strongly connected graphs：任意节点可以到达任意节点。2.有向无环图Directed Acyclic Graph (DAG):首先没有环，u能达到v，但v不能达到u。求strongly connected components (SCCs):对给定节点分别求入度和出度的BFS,然后对两个集合求交集 Bowtie structure of the web graphBroder et al. (1999) took a large snapshot of the web and tried to understand how the SCCs in the web graph fit together as a DAG这张图Here the starting nodes are sorted by the number of nodes that BFS visits when starting from that node图中蓝色节点只能访问一小部分节点，紫红色节点可以访问很多节点通过这个我们可以得出网络中的图组成 PageRank - Ranking nodes on the graph核心想法是吧links当作votes，一个节点的重要性是由被所指向的其他节点决定的公式为$r_{j=} \sum {i\rightarrow j}\frac{r{i}}{d_{i}}$ Matrix formulation这种计算方法需要N个式子，需要很长的时间。所以我们用邻接矩阵M来代替，M的每个列的和为1$if j \rightarrow i,then W_{^{ij}}=\frac{1}{d_{j}}$,则$r=Mr$，如下图的计算过程之后进行不断地迭代，$M(M…(M(Mr)$直到$|r-r^{‘}|&lt; \varepsilon$ PageRank: Problems1.dead ends:没有out-links2.Spider traps：节点发出的边只有自环，最终会吸收所有的重要性，比如图中b会聚集所有的重要性，a会没有重要性 解决方法是random teleportation或者random jumps当一次随机游走完成，下次网上冲浪有两种选择，有概率$\beta $跟随link，$1-\beta $跳到其它网页,跳到其他的网页节点有相同的可能性，$\beta $通常设定在0.8到2.9综合起来就是：$r_{j=} \sum {i\rightarrow j}\frac{r{i}}{d_{i}}+(1-\beta )\frac{1}{N}$下面可以定义谷歌矩阵$A=\beta \times M+(1-\beta )[\frac{1}{N}]_{N\times N}$，$r=A*r$注意这个公式假设M没有dead ends。我们可以提前处理矩阵M去除dead ends或者使用概率为1的随机random teleports Computing PageRank: Sparse matrix formulation但是这样对于节点太多的话，存储矩阵$A(NN)$需要大量空间，我们可以这么来计算：$r=\beta Mr+\frac{1-\beta }{N}$,$\frac{1-\beta }{N}$是一个向量，因为这样M是个稀疏矩阵，与向量乘机就没有那么大的计算量了]]></content>
       <categories>
         <category>图</category>
       </categories>
@@ -148,8 +153,8 @@
         <category>机器学习</category>
       </categories>
       <tags>
-        <tag>应用</tag>
         <tag>regression</tag>
+        <tag>应用</tag>
       </tags>
   </entry>
   <entry>
