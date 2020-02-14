@@ -4,14 +4,29 @@
     <title><![CDATA[leetcode207]]></title>
     <url>%2F2020%2F02%2F13%2Fleetcode207%2F</url>
     <content type="text"><![CDATA[207.课程表这道题等价于判断图里有没有环，两种方法一个是拓扑排序，一个是DFS 拓扑排序c++1234567891011121314151617181920212223242526272829303132class Solution &#123;public: bool canFinish(int numCourses, vector&lt;vector&lt;int&gt;&gt;&amp; prerequisites) &#123; vector&lt;int&gt; degree(numCourses, 0); // map&lt;int,int&gt;degree;for(int i=0;i&lt;numCourses;i++)degree[i]=0; map&lt;int,vector&lt;int&gt;&gt;cur; queue&lt;int&gt;q; for(int i=0;i&lt;prerequisites.size();i++)&#123; cur[prerequisites[i][1]].push_back(prerequisites[i][0]); degree[prerequisites[i][0]]++; &#125; for(int i=0;i&lt;degree.size();i++) //不是cur.size() &#123; if(degree[i]==0) q.push(i); &#125; int ans=0; while(!q.empty()) &#123; int node=q.front(); q.pop(); ans++; for(int i=0;i&lt;cur[node].size();i++) &#123; degree[cur[node][i]]--; if(degree[cur[node][i]]==0) q.push(cur[node][i]); &#125; &#125; if(ans==numCourses)return true; else return false; &#125;&#125;; 在这里我犯了一个错误，找了半天…啊我的时间都去哪了….对于入度容器我开始设计是C++ map&lt;int,vector&lt;int&gt;&gt;cur这样没有考虑度为0的节点，首先默认节点入度都为0，然后根据图来更新入度，这种情况可以就地改进见注释，或者直接用vector初始化]]></content>
+      <categories>
+        <category>图</category>
+      </categories>
   </entry>
   <entry>
     <title><![CDATA[deep_learning]]></title>
     <url>%2F2020%2F02%2F13%2Fdeep-learning%2F</url>
-    <content type="text"><![CDATA[激活函数（Activation functions）如果不使用激活函数，无论神经网络多少层都会是个线性激活函数除了二分类问题，不要使用sigmoid，tanh变现总是更好，但这些函数当z很大时，梯度会很小，训练会很慢，所以推荐relu函数。ReLu函数只要$z$是正值的情况下，导数恒等于1，当是$z$负值的时候，导数恒等于0。从实际上来说，当使用的导数时，$z$=0的导数是没有定义的。但是当编程实现的时候，$z$的取值刚好等于0.00000001，这个值相当小，所以，在实践中，不需要担心这个值，$z$是等于0的时候，假设一个导数是1或者0效果都可以。这里也有另一个版本的Relu被称为Leaky Relu,这个函数通常比Relu激活函数效果要好，尽管在实际中Leaky ReLu使用的并不多.对于sigmoid函数$g(z)=\frac{1}{1+e^{-x}}$,他的导数等于$g(z)\times (1-g(z))$对于tanh函数$\frac{e^{x}-e^{-x}}{e^{x}+e^{-x}}$,他的导数等于$1-(tanh(z))^{2}$Relu函数$g(z)=max(0,z)$,leaky Relu函数$g(z)=max(0.01z,z)$ 矩阵的维数比如图中的神经网络，第一个隐藏层$z^{[1]}=w^{[1]}x+b^{[1]}$,$z^{[1]}$是3×1的矩阵，$x$是2×1的矩阵，所以$w^{[1]}$是3×2的，总结起来就是$w^{[L]}$是$n^{[L]}\times n^{[L-1]}$的，对$dw$也是一样的，$b^{[L]}$就是$n^{[L]}\times1$的，见图片右半部分之后可以将$z^{[1]}$叠加起来，m为样本数量 参数随机初始化（Random+Initialization）$W^{[1]}=np.random.rando(2,2)*0.01,b=np.zeros((2,1))$为什么是0.01，而不是100或者1000。我们通常倾向于初始化为很小的随机数。因为如果你用tanh或者sigmoid激活函数，或者说只在输出层有一个Sigmoid，如果$W$很大，$Z$就会很大或者很小，因此这种情况下你很可能停在tanh/sigmoid函数的平坦的地方(见图3.8.2)，这些地方梯度很小也就意味着梯度下降会很慢，因此学习也就很慢。 正则化为什么只正则化参数$w$？为什么不再加上参数$b$呢？你可以这么做，只是我习惯省略不写，因为通常是一个高维参数矢量，已经可以表达高偏差问题，可能包含有很多参数，我们不可能拟合所有参数，而$b$只是单个数字，所以$w$几乎涵盖所有参数，而不是$b$，如果加了参数$b$，其实也没太大影响，因为只是众多参数中的一个，所以我通常省略不计，如果你想加上这个参数，完全没问题。]]></content>
+    <content type="text"><![CDATA[激活函数（Activation functions）如果不使用激活函数，无论神经网络多少层都会是个线性激活函数除了二分类问题，不要使用sigmoid，tanh变现总是更好，但这些函数当z很大时，梯度会很小，训练会很慢，所以推荐relu函数。ReLu函数只要$z$是正值的情况下，导数恒等于1，当是$z$负值的时候，导数恒等于0。从实际上来说，当使用的导数时，$z$=0的导数是没有定义的。但是当编程实现的时候，$z$的取值刚好等于0.00000001，这个值相当小，所以，在实践中，不需要担心这个值，$z$是等于0的时候，假设一个导数是1或者0效果都可以。这里也有另一个版本的Relu被称为Leaky Relu,这个函数通常比Relu激活函数效果要好，尽管在实际中Leaky ReLu使用的并不多.对于sigmoid函数$g(z)=\frac{1}{1+e^{-x}}$,他的导数等于$g(z)\times (1-g(z))$对于tanh函数$\frac{e^{x}-e^{-x}}{e^{x}+e^{-x}}$,他的导数等于$1-(tanh(z))^{2}$Relu函数$g(z)=max(0,z)$,leaky Relu函数$g(z)=max(0.01z,z)$ 矩阵的维数比如图中的神经网络，第一个隐藏层$z^{[1]}=w^{[1]}x+b^{[1]}$,$z^{[1]}$是3×1的矩阵，$x$是2×1的矩阵，所以$w^{[1]}$是3×2的，总结起来就是$w^{[L]}$是$n^{[L]}\times n^{[L-1]}$的，对$dw$也是一样的，$b^{[L]}$就是$n^{[L]}\times1$的，见图片右半部分之后可以将$z^{[1]}$叠加起来，m为样本数量 参数随机初始化（Random+Initialization）$W^{[1]}=np.random.rando(2,2)*0.01,b=np.zeros((2,1))$为什么是0.01，而不是100或者1000。我们通常倾向于初始化为很小的随机数。因为如果你用tanh或者sigmoid激活函数，或者说只在输出层有一个Sigmoid，如果$W$很大，$Z$就会很大或者很小，因此这种情况下你很可能停在tanh/sigmoid函数的平坦的地方(见图3.8.2)，这些地方梯度很小也就意味着梯度下降会很慢，因此学习也就很慢。 正则化（Regularization）1.为什么只正则化参数$w$？为什么不再加上参数$b$呢？你可以这么做，只是我习惯省略不写，因为通常是一个高维参数矢量，已经可以表达高偏差问题，可能包含有很多参数，我们不可能拟合所有参数，而$b$只是单个数字，所以$w$几乎涵盖所有参数，而不是$b$，如果加了参数$b$，其实也没太大影响，因为只是众多参数中的一个，所以我通常省略不计，如果你想加上这个参数，完全没问题。 2.为什么正则化会有用？当$\lambda$增大，$w$接近于0，会减少很多隐藏单元的影响，网络会变得简单，接近于逻辑回归，$z$也会很小($z^{[l]}=w^{[l]}a^{[l-1]}+b^{[l]}$),会呈线性。3.其他正则化方法：数据扩增（比如图片翻转、裁剪、扭曲），early stopearly stop无法将降低损失函数和过拟合独立处理，会很复杂，所以更倾向L2正则化，虽然要尝试很多不同的$\lambda$，计算代价会很大 归一化为什么要归一化？代价函数看起来会更对称，无论从哪个位置开始都能更直接的找到最小值，可以使用较大的步长。]]></content>
       <categories>
         <category>深度学习</category>
       </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[knn_application]]></title>
+    <url>%2F2020%2F02%2F10%2Fknn-application%2F</url>
+    <content type="text"><![CDATA[python counter类:python12345&gt;&gt;&gt; from collections import Counter&gt;&gt;&gt; s = "hello pinsily"&gt;&gt;&gt; d = Counter(s)&gt;&gt;&gt; dCounter(&#123;'l': 3, 'i': 2, 'h': 1, 'e': 1, 'o': 1, ' ': 1, 'p': 1, 'n': 1, 's': 1, 'y': 1&#125;) most_common(n)返回数量最多的前 n 个元素python12&gt;&gt;&gt; d.most_common(3)[('l', 3), ('i', 2), ('h', 1)] 代码实现：python12345678910111213141516171819202122232425262728293031import numpy as np from math import sqrtimport matplotlib.pyplot as pltimport warningsfrom matplotlib import stylefrom collections import Counterstyle.use('fivethirtyeight')dataset = &#123;'k':[[1,2],[2,3],[3,1]], 'r':[[6,5],[7,7],[8,6]]&#125;new_features = [5,7]for i in dataset: for ii in dataset[i]: plt.scatter(ii[0],ii[1],s=100,color=i)def k_nearest_neighbors(data, predict, k=3): if len(data) &gt;= k: warnings.warn('K is set to a value less than total voting groups!') distances = [] for group in data: for features in data[group]: euclidean_distance = np.linalg.norm(np.array(features)-np.array(predict)) #欧几里得距离 distances.append([euclidean_distance,group]) votes = [i[1] for i in sorted(distances)[:k]] vote_result = Counter(votes).most_common(1)[0][0] #不使用[0][0],得到的是[('r', 3)]. [0][0]得到元组中第一个元素 return vote_resultresult = k_nearest_neighbors(dataset,new_features,k=3)print(result)plt.scatter(new_features[0],new_features[1],s=50,color=result)#预测的数据用小红点表示plt.show() 运行结果：然后用这个代码来跑下癌症预测，代码如下python1234567891011121314151617181920212223242526272829303132333435363738394041424344454647import numpy as npimport matplotlib.pyplot as pltfrom matplotlib import styleimport warningsfrom collections import Counterimport pandas as pdimport randomdef k_nearest_neighbors(data, predict, k=3): if len(data) &gt;= k: warnings.warn('K is set to a value less than total voting groups!') distances = [] for group in data: for features in data[group]: euclidean_distance = np.linalg.norm(np.array(features)-np.array(predict)) distances.append([euclidean_distance,group]) votes = [i[1] for i in sorted(distances)[:k]] vote_result = Counter(votes).most_common(1)[0][0] #不使用[0][0],得到的是[('r', 3)]. [0][0]得到元组中第一个元素 return vote_resultdf = pd.read_csv('breast-cancer-wisconsin.txt')df.replace('?',-99999,inplace=True)df.drop(['id'],1,inplace=True)full_data = df.astype(float).values.tolist()test_size = 0.2train_set = &#123;2:[], 4:[]&#125;#良性恶性两个labletest_set = &#123;2:[], 4:[]&#125;train_data = full_data[:-int(test_size*len(full_data))]test_data = full_data[-int(test_size*len(full_data)):] #最后20%correct = 0total = 0for i in train_data: train_set[i[-1]].append(i[:-1]) #去掉label，将属性填入for i in test_data: test_set[i[-1]].append(i[:-1])for group in test_set: for data in test_set[group]: vote = k_nearest_neighbors(train_set, data, k=5) if group == vote: correct += 1 total += 1print('Accuracy:', correct/total) 准确度很高！]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>KNN</tag>
+        <tag>python</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[leetcode113]]></title>
@@ -96,18 +111,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[knn_application]]></title>
-    <url>%2F2020%2F02%2F03%2Fknn-application%2F</url>
-    <content type="text"><![CDATA[python counter类:python12345&gt;&gt;&gt; from collections import Counter&gt;&gt;&gt; s = "hello pinsily"&gt;&gt;&gt; d = Counter(s)&gt;&gt;&gt; dCounter(&#123;'l': 3, 'i': 2, 'h': 1, 'e': 1, 'o': 1, ' ': 1, 'p': 1, 'n': 1, 's': 1, 'y': 1&#125;) most_common(n)返回数量最多的前 n 个元素python12&gt;&gt;&gt; d.most_common(3)[('l', 3), ('i', 2), ('h', 1)] 代码实现：python12345678910111213141516171819202122232425262728293031import numpy as np from math import sqrtimport matplotlib.pyplot as pltimport warningsfrom matplotlib import stylefrom collections import Counterstyle.use('fivethirtyeight')dataset = &#123;'k':[[1,2],[2,3],[3,1]], 'r':[[6,5],[7,7],[8,6]]&#125;new_features = [5,7]for i in dataset: for ii in dataset[i]: plt.scatter(ii[0],ii[1],s=100,color=i)def k_nearest_neighbors(data, predict, k=3): if len(data) &gt;= k: warnings.warn('K is set to a value less than total voting groups!') distances = [] for group in data: for features in data[group]: euclidean_distance = np.linalg.norm(np.array(features)-np.array(predict)) #欧几里得距离 distances.append([euclidean_distance,group]) votes = [i[1] for i in sorted(distances)[:k]] vote_result = Counter(votes).most_common(1)[0][0] #不使用[0][0],得到的是[('r', 3)]. [0][0]得到元组中第一个元素 return vote_resultresult = k_nearest_neighbors(dataset,new_features,k=3)print(result)plt.scatter(new_features[0],new_features[1],s=50,color=result)#预测的数据用小红点表示plt.show() 运行结果：]]></content>
-      <categories>
-        <category>机器学习</category>
-      </categories>
-      <tags>
-        <tag>KNN</tag>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[实现regression]]></title>
     <url>%2F2020%2F02%2F01%2Fregression%2F</url>
     <content type="text"><![CDATA[两个error：bias,varianceWhat to do with large bias?1.Add more features as input2.模型更复杂What to do with large variance?1.更多数据2.增加正则化 梯度下降学习率和损失函数的关系：学习率大容易错过loss的最低点，学习率小下降慢 随着我们更新次数的增大，我们是希望我们的学习率越来越慢，因为分母是累加梯度的平方，到后面累加的比较大。因为我们认为在学习率的最初阶段，我们是距离损失函数最优解很远的，随着更新的次数的增多，我们认为越来越接近最优解，于是学习速率也随之变慢。 梯度下降理论.pdf)实际是用泰勒函数的近似 python1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253from statistics import meanimport numpy as npimport randomimport matplotlib.pyplot as pltfrom matplotlib import stylestyle.use('ggplot')def create_dataset(hm,variance,step=2,correlation=False): val = 1 ys = [] for i in range(hm): y = val + random.randrange(-variance,variance) ys.append(y) if correlation and correlation == 'pos': val+=step elif correlation and correlation == 'neg': val-=step xs = [i for i in range(len(ys))] return np.array(xs, dtype=np.float64),np.array(ys,dtype=np.float64)def best_fit_slope_and_intercept(xs,ys): m = (mean(xs)*mean(ys)-mean(xs*ys)) / (mean(xs)*mean(xs)-mean(xs*xs)) b= mean(ys)-m*mean(xs) return m,bdef squared_error(ys_orig,ys_line): return sum((ys_line - ys_orig) * (ys_line - ys_orig))def coefficient_of_determination(ys_orig,ys_line): y_mean_line = [mean(ys_orig) for y in ys_orig] squared_error_regr = sum((ys_line - ys_orig) * (ys_line - ys_orig)) squared_error_y_mean = sum((y_mean_line - ys_orig) * (y_mean_line - ys_orig)) print(squared_error_regr) print(squared_error_y_mean) r_squared = 1 - (squared_error_regr/squared_error_y_mean) return r_squaredxs, ys = create_dataset(40,40,2,correlation='pos')m, b = best_fit_slope_and_intercept(xs,ys)regression_line = [(m*x)+b for x in xs]r_squared = coefficient_of_determination(ys,regression_line)print(r_squared)plt.scatter(xs,ys,color='#003F72', label = 'data')plt.plot(xs, regression_line, label = 'regression line')plt.legend(loc=4)plt.show() R-square：分子是预测数据与原始数据均值之差的平方和，分母是原始数据和均值之差的平方和R-square=0.5288792849075254]]></content>
@@ -153,8 +156,8 @@
         <category>机器学习</category>
       </categories>
       <tags>
-        <tag>regression</tag>
         <tag>应用</tag>
+        <tag>regression</tag>
       </tags>
   </entry>
   <entry>
