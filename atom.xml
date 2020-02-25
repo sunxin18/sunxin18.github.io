@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://sunxin18.github.io/"/>
-  <updated>2020-02-25T11:00:47.264Z</updated>
+  <updated>2020-02-25T11:09:13.641Z</updated>
   <id>https://sunxin18.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>论文整理</title>
+    <link href="https://sunxin18.github.io/2020/02/25/paper1/"/>
+    <id>https://sunxin18.github.io/2020/02/25/paper1/</id>
+    <published>2020-02-25T11:06:26.000Z</published>
+    <updated>2020-02-25T11:09:13.641Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>论文整理：</p><h1 id="truss："><a href="#truss：" class="headerlink" title="truss："></a>truss：</h1><h2 id="Efficient-Truss-Maintenance-in-Evolving-Networks-2014"><a href="#Efficient-Truss-Maintenance-in-Evolving-Networks-2014" class="headerlink" title="Efficient Truss Maintenance in Evolving Networks(2014)"></a>Efficient Truss Maintenance in Evolving Networks(2014)</h2><p>1证明了每次插入边后，truss最多加1<br>2.插入边后，受影响truss的范围</p><h2 id="Streaming-and-Batch-Algorithms-for-Truss-2019"><a href="#Streaming-and-Batch-Algorithms-for-Truss-2019" class="headerlink" title="Streaming and Batch Algorithms for Truss(2019)"></a>Streaming and Batch Algorithms for Truss(2019)</h2><ol><li>插入一条边后对不同k值边的更新不会互相影响。<br>Decomposition<h1 id="core"><a href="#core" class="headerlink" title="core"></a>core</h1><h2 id="K-core-Minimization-An-Edge-Manipulation-Approach-2018"><a href="#K-core-Minimization-An-Edge-Manipulation-Approach-2018" class="headerlink" title="K-core Minimization: An Edge Manipulation Approach(2018)"></a>K-core Minimization: An Edge Manipulation Approach(2018)</h2>因为m条里选出b个组合复杂度过高，提出了两个greedy算法，第一个就是对k-core里的每条边删除计算followers，选出b个最优解。第二个算法是对候选集和的优化，只选择k-core图中两个顶点分别为k和大于k的边。</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+      
+    
+    </summary>
+    
+    
+      <category term="truss" scheme="https://sunxin18.github.io/tags/truss/"/>
+    
+      <category term="core" scheme="https://sunxin18.github.io/tags/core/"/>
+    
+  </entry>
   
   <entry>
     <title>新冠状病毒预测</title>
@@ -483,29 +508,6 @@
       
     
     </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Node Classification</title>
-    <link href="https://sunxin18.github.io/2019/11/05/classify/"/>
-    <id>https://sunxin18.github.io/2019/11/05/classify/</id>
-    <published>2019-11-05T13:52:18.000Z</published>
-    <updated>2020-02-13T08:33:17.301Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="Node-Classification"><a href="#Node-Classification" class="headerlink" title="Node Classification"></a>Node Classification</h1><p>Node Classification is the process of assigning labels to nodes within a graph, given a set of existing node labels. This setting corresponds to a semi-supervised setting. While it would be nice to be able to collect the true label values of every node, oftentimes, in real world settings, it is extremely expensive to collect those labels. Consequently, we rely on random sampling to obtain these labels. Then we use that small sample of labels to develop models that generate trustworthy node label predictions for our graph.</p><p>Collective Classification is an umbrella term describing how we assign labels to all nodes in the network together. We then propagate the information from these labels around the network and attempt to come up with stable assignments for each node. We are able to do these tasks because networks have special properties, specifically, correlations between nodes, that we can leverage to build our predictor. Essentially, collective classification relies on the Markov Assumption that the labely $Y_{i}$ of one node depends on the labels of its neighbors, which can be mathematically written as:$P(Y_{i}|i)=P(Y_{i}|N_{i})$</p><p>The three main techniques that are used are Relational Classification, Iterative Classification, and Belief Classification, roughly ordered byhow advanced these methods are.</p><h1 id="Correlations-in-a-Network"><a href="#Correlations-in-a-Network" class="headerlink" title="Correlations in a Network"></a>Correlations in a Network</h1><h2 id="Homophily"><a href="#Homophily" class="headerlink" title="Homophily"></a>Homophily</h2><p>Homophily generally refers to the tendency of individuals to associate and bond with similar others. Similarities, for instance in a social network, can include a variety of attributes, including age, gender, organizational affiliation, taste, and more.</p><h2 id="Influence"><a href="#Influence" class="headerlink" title="Influence"></a>Influence</h2><p>Another example of why networks may demonstrate correlations is Influence. Under these circumstances, the links and edges formed can influence the behavior of the node itself</p><h2 id="Confounding"><a href="#Confounding" class="headerlink" title="Confounding"></a>Confounding</h2><p>Confounding variables can cause nodes to exhibit similar characteristics. For instance, the environment we are raised in may influence our similarity in multiple dimensions, from the language we speak, to our music tastes, to our political preferences.</p><h1 id="Leveraging-Network-Correlations-for-Classification-of-Network-Data"><a href="#Leveraging-Network-Correlations-for-Classification-of-Network-Data" class="headerlink" title="Leveraging Network Correlations for Classification of Network Data"></a>Leveraging Network Correlations for Classification of Network Data</h1><p>Whether or not a particular node X receives a particular label may depend on a variety of factors. In our context, those most commonly include:<br><em>X的featrue</em>X邻居的feature<br><em>X邻居的lable<br>我们也要考虑网络的拓扑结构。Collective classification包括三个部分</em>A local classifier初始化节点lable<br>    -根据节点的属性和特征，不考虑拓扑结构<br><em>A relational classifier is useful because it allows us to capture correlations (e.g. the homophily, influence) between nodes in the network.<br>    -This classifier predicts the label of one node based on the labels and features of its neighbors.<br>    -This classifier predicts the label of one node based on the labels and features of its neighbors.</em>Collective inference propagates the correlations through the network. 经过多次传递，得到邻居点间的contribution<br>    -当节点和邻点之间的差异最小或者到达最大递归次数停止<br>    -节点结构对最终预测有很大的影响<br><a href="/2019/11/05/classify/1.png" data-fancybox="group" data-caption class="fancybox"><img src="/2019/11/05/classify/1.png" alt title></a></p><p>To make those predictions, we will use a Probabilistic Relational Classifier, the basic idea of which is that the class probability of $Y_{i}$<br> is a weighted average of the class probabilities of its neighbors. To initialize, we will use the ground-truth labels of our labeled nodes, and for the unlabeled nodes, we will initialize Y uniformly。使用随机的序列</p><p> week points:不能保证收敛，模型没有使用node feature</p><h1 id="Iterative-Classification"><a href="#Iterative-Classification" class="headerlink" title="Iterative Classification"></a>Iterative Classification</h1><p>This is very similar to what we did before with the relational classifier, the key difference being that we now use the feature vector and once again, convergence is not guaranteed.</p><h1 id="Message-Passing-Belief-Propagation"><a href="#Message-Passing-Belief-Propagation" class="headerlink" title="Message Passing/Belief Propagation"></a>Message Passing/Belief Propagation</h1><p><a href="/2019/11/05/classify/2.png" data-fancybox="group" data-caption class="fancybox"><img src="/2019/11/05/classify/2.png" alt title></a><br><a href="/2019/11/05/classify/3.png" data-fancybox="group" data-caption class="fancybox"><img src="/2019/11/05/classify/3.png" alt title></a><br>This equation summarizes our task: to calculate the message from i to j, we will sum over all of our states the label-label potential multiplied by our prior, multiplied by the product of all the messages sent by neighbors from the previous rounds. To initialize, we set all of our messages equal to 1. Then, we calculate our message from i to j, using the formula described above. We will repeat this for each node until we reach convergence, and then we can calculate our final assignment, i’s belief of being in state $Y_{i}$ or $b(Y_{i})$<br><a href="/2019/11/05/classify/4.png" data-fancybox="group" data-caption class="fancybox"><img src="/2019/11/05/classify/4.png" alt title></a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
-      
-    
-    </summary>
-    
-      <category term="图" scheme="https://sunxin18.github.io/categories/%E5%9B%BE/"/>
     
     
   </entry>
