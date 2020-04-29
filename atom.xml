@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://sunxin18.github.io/"/>
-  <updated>2020-04-29T12:32:42.010Z</updated>
+  <updated>2020-04-29T12:42:48.514Z</updated>
   <id>https://sunxin18.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://sunxin18.github.io/2020/04/29/blog-trsf/"/>
     <id>https://sunxin18.github.io/2020/04/29/blog-trsf/</id>
     <published>2020-04-29T12:14:36.000Z</published>
-    <updated>2020-04-29T12:32:42.010Z</updated>
+    <updated>2020-04-29T12:42:48.514Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>#一、拷贝原始电脑blog文件夹到新电脑</p><p>#二、安装git、node.js</p><p>#三、安装 hexo<br>在 cmd 下输入下面指令安装 hexo<br><div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">Code</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight plain"><figcaption><span>install hexo-cli -g```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#四、在blog文件夹下执行git bash，输入以下命令</span><br><span class="line">```npm install</span><br><span class="line">npm install hexo-deployer-git --save  // 文章部署到 git 的模块</span><br><span class="line">（下面为选择安装）</span><br><span class="line">npm install hexo-generator-feed --save  // 建立 RSS 订阅</span><br><span class="line">npm install hexo-generator-sitemap --save // 建立站点地图</span><br></pre></td></tr></table></figure></div></p><p>#五、创建ssh</p><p>##（1）打开git bash，在用户主目录下运行：ssh-keygen -t rsa -C “<a href="mailto:youremail@example.com" target="_blank" rel="noopener">youremail@example.com</a>“ 把其中的邮件地址换成自己的邮件地址，然后一路回车</p><p>##（2）最后完成后，会在用户主目录下生成.ssh目录，里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH key密钥对，id_rsa是私钥，千万不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人。</p><p>##（3）登陆GitHub，打开「Settings」-&gt;「SSH and GPG keys」，然后点击「new SSH key」，填上任意Title，在Key文本框里粘贴公钥id_rsa.pub文件的内容（千万不要粘贴成私钥了！），最后点击「Add SSH Key」，你就应该看到已经添加的Key。<br><strong>注意：不要在git版本库中运行ssh，然后又将它提交，这样就把密码泄露出去了。</strong></p><p>六、部署可能出现的问题<br>git上传包提交时出现：Please tell me who you are.<br><a href="/2020/04/29/blog-trsf/1.png" data-fancybox="group" data-caption class="fancybox"><img src="/2020/04/29/blog-trsf/1.png" alt title></a><br>解决方法：执行<br>git config –global user.email “你的邮箱<br>git config –global user.name “gihub用户名”</p><p>之后就可以正常使用啦</p>]]></content>
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>#一、拷贝原始电脑blog文件夹到新电脑#</p><p>#二、安装git、node.js#</p><p>#三、安装 hexo#<br>在 cmd 下输入下面指令安装 hexo<br><div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">Code</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight plain"><figcaption><span>install hexo-cli -g```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#四、在blog文件夹下执行git bash，输入以下命令#</span><br><span class="line">```npm install</span><br><span class="line">npm install hexo-deployer-git --save  // 文章部署到 git 的模块</span><br><span class="line">（下面为选择安装）</span><br><span class="line">npm install hexo-generator-feed --save  // 建立 RSS 订阅</span><br><span class="line">npm install hexo-generator-sitemap --save // 建立站点地图</span><br></pre></td></tr></table></figure></div></p><p>#五、创建ssh#</p><p>##（1）打开git bash，在用户主目录下运行：ssh-keygen -t rsa -C “<a href="mailto:youremail@example.com" target="_blank" rel="noopener">youremail@example.com</a>“ 把其中的邮件地址换成自己的邮件地址，然后一路回车</p><p>##（2）最后完成后，会在用户主目录下生成.ssh目录，里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH key密钥对，id_rsa是私钥，千万不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人。</p><p>##（3）登陆GitHub，打开「Settings」-&gt;「SSH and GPG keys」，然后点击「new SSH key」，填上任意Title，在Key文本框里粘贴公钥id_rsa.pub文件的内容（千万不要粘贴成私钥了！），最后点击「Add SSH Key」，你就应该看到已经添加的Key。<br><strong>注意：不要在git版本库中运行ssh，然后又将它提交，这样就把密码泄露出去了。</strong></p><p>#六、部署可能出现的问题#<br>git上传包提交时出现：Please tell me who you are.<br><a href="/2020/04/29/blog-trsf/1.png" data-fancybox="group" data-caption class="fancybox"><img src="/2020/04/29/blog-trsf/1.png" alt title></a><br>解决方法：执行<br>git config –global user.email “你的邮箱<br>git config –global user.name “gihub用户名”</p><p>之后就可以正常使用啦</p>]]></content>
     
     <summary type="html">
     
@@ -34,7 +34,7 @@
     
     </summary>
     
-      <category term="算法编程" scheme="https://sunxin18.github.io/categories/%E7%AE%97%E6%B3%95%E7%BC%96%E7%A8%8B/"/>
+      <category term="博客维护" scheme="https://sunxin18.github.io/categories/%E5%8D%9A%E5%AE%A2%E7%BB%B4%E6%8A%A4/"/>
     
     
       <category term="博客" scheme="https://sunxin18.github.io/tags/%E5%8D%9A%E5%AE%A2/"/>
