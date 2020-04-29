@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[换新电脑hexo博客的迁移]]></title>
+    <url>%2F2020%2F04%2F29%2Fblog-trsf%2F</url>
+    <content type="text"><![CDATA[#一、拷贝原始电脑blog文件夹到新电脑 #二、安装git、node.js #三、安装 hexo在 cmd 下输入下面指令安装 hexoCodeinstall hexo-cli -g```123456#四、在blog文件夹下执行git bash，输入以下命令```npm installnpm install hexo-deployer-git --save // 文章部署到 git 的模块（下面为选择安装）npm install hexo-generator-feed --save // 建立 RSS 订阅npm install hexo-generator-sitemap --save // 建立站点地图 #五、创建ssh ##（1）打开git bash，在用户主目录下运行：ssh-keygen -t rsa -C “youremail@example.com“ 把其中的邮件地址换成自己的邮件地址，然后一路回车 ##（2）最后完成后，会在用户主目录下生成.ssh目录，里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH key密钥对，id_rsa是私钥，千万不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人。 ##（3）登陆GitHub，打开「Settings」-&gt;「SSH and GPG keys」，然后点击「new SSH key」，填上任意Title，在Key文本框里粘贴公钥id_rsa.pub文件的内容（千万不要粘贴成私钥了！），最后点击「Add SSH Key」，你就应该看到已经添加的Key。注意：不要在git版本库中运行ssh，然后又将它提交，这样就把密码泄露出去了。 六、部署可能出现的问题git上传包提交时出现：Please tell me who you are.解决方法：执行git config –global user.email “你的邮箱git config –global user.name “gihub用户名” 之后就可以正常使用啦]]></content>
+      <categories>
+        <category>算法编程</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[准备复试]]></title>
     <url>%2F2020%2F04%2F29%2Fhello-world%2F</url>
     <content type="text"><![CDATA[复试加油，相信自己！]]></content>
