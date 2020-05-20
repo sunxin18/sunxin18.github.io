@@ -137,7 +137,7 @@
     <link href="https://sunxin18.github.io/2020/05/09/Binary-Search/"/>
     <id>https://sunxin18.github.io/2020/05/09/Binary-Search/</id>
     <published>2020-05-09T12:10:33.000Z</published>
-    <updated>2020-05-20T14:26:30.635Z</updated>
+    <updated>2020-05-20T14:53:24.379Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>二分搜索核心思想：把<em>待搜索区间</em>分为<em>有目标元素的区间</em>和<em>不包含目标元素的区间</em>，排除掉<em>不包含目标元素的区间</em>的区间，剩下就是<em>有目标元素的区间</em>。</p>]]></content>
     
