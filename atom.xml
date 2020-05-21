@@ -62,13 +62,13 @@
   </entry>
   
   <entry>
-    <title></title>
+    <title>attention(注意力机制解析)</title>
     <link href="https://sunxin18.github.io/2020/05/20/attention/"/>
     <id>https://sunxin18.github.io/2020/05/20/attention/</id>
-    <published>2020-05-20T00:50:58.302Z</published>
-    <updated>2020-05-20T14:07:19.499Z</updated>
+    <published>2020-05-20T00:50:58.000Z</published>
+    <updated>2020-05-21T00:51:10.662Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><hr><p>title: attention<br>date: 2020-05-20 08:50:58<br>tags: attention<br>categories: 自然语言处理<br>cover: <a href="https://i.loli.net/2020/05/20/taH9rqVgoxmpIhY.jpg" target="_blank" rel="noopener">https://i.loli.net/2020/05/20/taH9rqVgoxmpIhY.jpg</a><br>本文我们将讲解注意力机制在视觉和自然语言以及图挖掘领域的使用。<br>PyTorch：<a href="https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Image-Captioning" target="_blank" rel="noopener">https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Image-Captioning</a></p><h2 id="mutimodal-learning"><a href="#mutimodal-learning" class="headerlink" title="mutimodal learning"></a>mutimodal learning</h2><p>即将多个模型连接起来，每个模型完成相应的任务，一起完成比如看图说话、提取摘要等任务。<br><a href="/2020/05/20/attention/1.png" data-fancybox="group" data-caption class="fancybox"><img src="/2020/05/20/attention/1.png" alt title></a></p><h2 id="attention-注意力机制"><a href="#attention-注意力机制" class="headerlink" title="attention(注意力机制)"></a>attention(注意力机制)</h2><p>将注意力放到重要的地方，比较符合人类的思考，可以应用在文本、图像、自注意力(self-attention)</p><h3 id="看图说话"><a href="#看图说话" class="headerlink" title="看图说话"></a>看图说话</h3><p>先把图片提取出一个向量作为桥梁，我们取模型中倒数第二个向量v，wih是一个转移矩阵,输入到RNN中来生成语句序列<br>但这模型有些问题，</p><ol><li>识别不出来某些物体</li><li>我们把图片等价于一个向量，通过这个向量来生成，其实有时候我们只需要关注图片中的一直猫，不需要理解整张图片<br><a href="/2020/05/20/attention/2.png" data-fancybox="group" data-caption class="fancybox"><img src="/2020/05/20/attention/2.png" alt title></a></li></ol><p>##图像识别的注意力机制<br>这里feature矩阵每个格子都是一个d维的向量，a1也是一个3×3的矩阵，每个格代表这个区域的权重，当我们生成第一个单词我们要将注意力放在概率最高的区域，然后将这个两个矩阵的信息进行汇集到向量$Z$，较于之前的seq2seq模型，我们这里就多了一个$Z$<br><a href="/2020/05/20/attention/3.png" data-fancybox="group" data-caption class="fancybox"><img src="/2020/05/20/attention/3.png" alt title></a><br>我们将$z1$输入到rnn模型，这里的first word就是start ，通过h1输出第一个单词和第二个单词的注意力，然后再生成$z2$,这里的$y2$就是的$d1$<br><a href="/2020/05/20/attention/4.png" data-fancybox="group" data-caption class="fancybox"><img src="/2020/05/20/attention/4.png" alt title></a></p><p><a href="https://blog.csdn.net/shenxiaolu1984/article/details/51493673#fn:1" target="_blank" rel="noopener">https://blog.csdn.net/shenxiaolu1984/article/details/51493673#fn:1</a></p>]]></content>
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>本文我们将讲解注意力机制在视觉和自然语言以及图挖掘领域的使用。<br>PyTorch：<a href="https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Image-Captioning" target="_blank" rel="noopener">https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Image-Captioning</a></p><h2 id="mutimodal-learning"><a href="#mutimodal-learning" class="headerlink" title="mutimodal learning"></a>mutimodal learning</h2><p>即将多个模型连接起来，每个模型完成相应的任务，一起完成比如看图说话、提取摘要等任务。<br><a href="/2020/05/20/attention/1.png" data-fancybox="group" data-caption class="fancybox"><img src="/2020/05/20/attention/1.png" alt title></a></p><h2 id="attention-注意力机制"><a href="#attention-注意力机制" class="headerlink" title="attention(注意力机制)"></a>attention(注意力机制)</h2><p>将注意力放到重要的地方，比较符合人类的思考，可以应用在文本、图像、自注意力(self-attention)</p><h3 id="看图说话"><a href="#看图说话" class="headerlink" title="看图说话"></a>看图说话</h3><p>先把图片提取出一个向量作为桥梁，我们取模型中倒数第二个向量v，wih是一个转移矩阵,输入到RNN中来生成语句序列<br>但这模型有些问题，</p><ol><li>识别不出来某些物体</li><li>我们把图片等价于一个向量，通过这个向量来生成，其实有时候我们只需要关注图片中的一直猫，不需要理解整张图片<br><a href="/2020/05/20/attention/2.png" data-fancybox="group" data-caption class="fancybox"><img src="/2020/05/20/attention/2.png" alt title></a></li></ol><p>##图像识别的注意力机制<br>这里feature矩阵每个格子都是一个d维的向量，a1也是一个3×3的矩阵，每个格代表这个区域的权重，当我们生成第一个单词我们要将注意力放在概率最高的区域，然后将这个两个矩阵的信息进行汇集到向量$Z$，较于之前的seq2seq模型，我们这里就多了一个$Z$<br><a href="/2020/05/20/attention/3.png" data-fancybox="group" data-caption class="fancybox"><img src="/2020/05/20/attention/3.png" alt title></a><br>我们将$z1$输入到rnn模型，这里的first word就是start ，通过h1输出第一个单词和第二个单词的注意力，然后再生成$z2$,这里的$y2$就是的$d1$<br><a href="/2020/05/20/attention/4.png" data-fancybox="group" data-caption class="fancybox"><img src="/2020/05/20/attention/4.png" alt title></a></p><p><a href="https://blog.csdn.net/shenxiaolu1984/article/details/51493673#fn:1" target="_blank" rel="noopener">https://blog.csdn.net/shenxiaolu1984/article/details/51493673#fn:1</a></p>]]></content>
     
     <summary type="html">
     
@@ -79,6 +79,10 @@
     
     </summary>
     
+      <category term="自然语言处理" scheme="https://sunxin18.github.io/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/"/>
+    
+    
+      <category term="attention" scheme="https://sunxin18.github.io/tags/attention/"/>
     
   </entry>
   

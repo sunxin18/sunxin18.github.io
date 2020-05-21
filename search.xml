@@ -20,9 +20,15 @@
       </tags>
   </entry>
   <entry>
-    <title></title>
+    <title><![CDATA[attention(注意力机制解析)]]></title>
     <url>%2F2020%2F05%2F20%2Fattention%2F</url>
-    <content type="text"><![CDATA[title: attentiondate: 2020-05-20 08:50:58tags: attentioncategories: 自然语言处理cover: https://i.loli.net/2020/05/20/taH9rqVgoxmpIhY.jpg本文我们将讲解注意力机制在视觉和自然语言以及图挖掘领域的使用。PyTorch：https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Image-Captioning mutimodal learning即将多个模型连接起来，每个模型完成相应的任务，一起完成比如看图说话、提取摘要等任务。 attention(注意力机制)将注意力放到重要的地方，比较符合人类的思考，可以应用在文本、图像、自注意力(self-attention) 看图说话先把图片提取出一个向量作为桥梁，我们取模型中倒数第二个向量v，wih是一个转移矩阵,输入到RNN中来生成语句序列但这模型有些问题， 识别不出来某些物体 我们把图片等价于一个向量，通过这个向量来生成，其实有时候我们只需要关注图片中的一直猫，不需要理解整张图片 ##图像识别的注意力机制这里feature矩阵每个格子都是一个d维的向量，a1也是一个3×3的矩阵，每个格代表这个区域的权重，当我们生成第一个单词我们要将注意力放在概率最高的区域，然后将这个两个矩阵的信息进行汇集到向量$Z$，较于之前的seq2seq模型，我们这里就多了一个$Z$我们将$z1$输入到rnn模型，这里的first word就是start ，通过h1输出第一个单词和第二个单词的注意力，然后再生成$z2$,这里的$y2$就是的$d1$ https://blog.csdn.net/shenxiaolu1984/article/details/51493673#fn:1]]></content>
+    <content type="text"><![CDATA[本文我们将讲解注意力机制在视觉和自然语言以及图挖掘领域的使用。PyTorch：https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Image-Captioning mutimodal learning即将多个模型连接起来，每个模型完成相应的任务，一起完成比如看图说话、提取摘要等任务。 attention(注意力机制)将注意力放到重要的地方，比较符合人类的思考，可以应用在文本、图像、自注意力(self-attention) 看图说话先把图片提取出一个向量作为桥梁，我们取模型中倒数第二个向量v，wih是一个转移矩阵,输入到RNN中来生成语句序列但这模型有些问题， 识别不出来某些物体 我们把图片等价于一个向量，通过这个向量来生成，其实有时候我们只需要关注图片中的一直猫，不需要理解整张图片 ##图像识别的注意力机制这里feature矩阵每个格子都是一个d维的向量，a1也是一个3×3的矩阵，每个格代表这个区域的权重，当我们生成第一个单词我们要将注意力放在概率最高的区域，然后将这个两个矩阵的信息进行汇集到向量$Z$，较于之前的seq2seq模型，我们这里就多了一个$Z$我们将$z1$输入到rnn模型，这里的first word就是start ，通过h1输出第一个单词和第二个单词的注意力，然后再生成$z2$,这里的$y2$就是的$d1$ https://blog.csdn.net/shenxiaolu1984/article/details/51493673#fn:1]]></content>
+      <categories>
+        <category>自然语言处理</category>
+      </categories>
+      <tags>
+        <tag>attention</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[算法优化]]></title>
