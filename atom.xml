@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://sunxin18.github.io/"/>
-  <updated>2020-05-26T03:03:21.535Z</updated>
+  <updated>2020-05-27T03:53:30.590Z</updated>
   <id>https://sunxin18.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>blog_bea</title>
+    <link href="https://sunxin18.github.io/2020/05/27/blog-bea/"/>
+    <id>https://sunxin18.github.io/2020/05/27/blog-bea/</id>
+    <published>2020-05-27T03:53:30.000Z</published>
+    <updated>2020-05-27T03:53:30.590Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>bug</title>
@@ -454,24 +475,6 @@
     </summary>
     
       <category term="linux" scheme="https://sunxin18.github.io/categories/linux/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>say somethingto myself</title>
-    <link href="https://sunxin18.github.io/2020/03/10/for-me/"/>
-    <id>https://sunxin18.github.io/2020/03/10/for-me/</id>
-    <published>2020-03-10T10:30:11.000Z</published>
-    <updated>2020-03-10T12:02:58.000Z</updated>
-    
-    <content type="html"><![CDATA[<div id="hexo-blog-encrypt" data-wpm="哎呀你输错了！" data-whm="OOPS, these decrypted content may changed, but you can still have a look.">  <div class="hbe-input-container">  <input type="password" id="hbePass" placeholder="" />    <label for="hbePass">该文章已加密, 请输入密码查看。</label>    <div class="bottom-line"></div>  </div>  <script id="hbeData" type="hbeData" data-hmacdigest="4468f32117079e40bc33a8823841de91774a3f1f6688e975a1585ce5a6d730f2">38cd76bef1cf79f27267863aa0f1e10aff0a55b3032fb665653565d974dcbbb6fb9e335fcb6f2cac947609853f0c56f0dbf7300ebc6e47358c153341a4c18fe59abedea6571c7603dd0c3ebeb08faededad4174f6c6eeda32fe389116f16e28f0210187cfa4a272439508fc90658c1b2309a116992d303d700f05971b0e4855d4f4ff589cfc7838359191bd9ee6077a648cc1789b19943078668c653d9694c0c484aaaa3e126d8a153c6e91c689217e97fdcb7997cda884612bdc08273526ce2ae6489c37d097434752f4027a4af6877</script></div><script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">]]></content>
-    
-    <summary type="html">
-    
-      Here&#39;s something encrypted, password is required to continue reading.
-    
-    </summary>
     
     
   </entry>
