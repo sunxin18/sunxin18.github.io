@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://sunxin18.github.io/about/index.html</loc>
+    
+    <lastmod>2020-05-27T06:00:31.389Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://sunxin18.github.io/2020/02/20/face/</loc>
     
     <lastmod>2020-05-27T04:35:00.505Z</lastmod>
@@ -334,13 +341,6 @@
     <loc>https://sunxin18.github.io/categories/index.html</loc>
     
     <lastmod>2020-02-05T06:07:54.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sunxin18.github.io/about/index.html</loc>
-    
-    <lastmod>2020-02-05T05:46:02.000Z</lastmod>
     
   </url>
   
