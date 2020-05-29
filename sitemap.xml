@@ -2,9 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://sunxin18.github.io/2020/05/24/bug/</loc>
+    
+    <lastmod>2020-05-28T03:27:27.075Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sunxin18.github.io/2020/05/20/seq2/</loc>
+    
+    <lastmod>2020-05-27T13:39:33.877Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://sunxin18.github.io/about/index.html</loc>
     
-    <lastmod>2020-05-27T06:00:31.389Z</lastmod>
+    <lastmod>2020-05-27T06:02:57.085Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sunxin18.github.io/2020/02/07/pagerank/</loc>
+    
+    <lastmod>2020-05-27T06:02:15.163Z</lastmod>
     
   </url>
   
@@ -12,13 +33,6 @@
     <loc>https://sunxin18.github.io/2020/02/20/face/</loc>
     
     <lastmod>2020-05-27T04:35:00.505Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sunxin18.github.io/2020/02/07/pagerank/</loc>
-    
-    <lastmod>2020-05-27T04:32:50.106Z</lastmod>
     
   </url>
   
@@ -54,20 +68,6 @@
     <loc>https://sunxin18.github.io/html/index.html</loc>
     
     <lastmod>2020-05-27T03:31:49.306Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sunxin18.github.io/2020/05/20/seq2/</loc>
-    
-    <lastmod>2020-05-26T03:25:43.659Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sunxin18.github.io/2020/05/24/bug/</loc>
-    
-    <lastmod>2020-05-26T03:03:21.535Z</lastmod>
     
   </url>
   
