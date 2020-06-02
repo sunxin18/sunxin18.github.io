@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[transformer]]></title>
+    <url>%2F2020%2F05%2F31%2Ftransformer%2F</url>
+    <content type="text"><![CDATA[seq2seq主要有下面两个不足： long—term dependency 会出现梯度消失或者爆炸 只能串行 时序的模型，后面的运算必须依赖于前面的运算 我们知道同一个单词可能在不同的语境中可能有不同的意思也就是需要不同的向量表达，这个表达依赖于上下文的意思，其他单词也影响着这个单词的意思， transformer就改进了这块的不足。 transformer的优点 RNN会将它已经处理过的前面的所有单词/向量的表示与它正在处理的当前单词/向量结合起来。而自注意力机制会将所有相关单词的理解融入到我们正在处理的单词中。 流程 首先输入就是每个单词的embedding，比如可以是glove训练出来的，然后有三个参数矩阵，Wo,Wk,Wv,然后输入向量分别与三个矩阵相乘，得到三个向量，W^{o},W^{k},W^{v},然后输入向量分别与三个矩阵相乘，得到三个向量，Wo,Wk,Wv,然后输入向量分别与三个矩阵相乘，得到三个向量，q1,k1,v1,这里的向量是一个比原始embedding向量更加低维的表达,这里的向量是一个比原始embedding向量更加低维的表达,这里的向量是一个比原始embedding向量更加低维的表达q1 \cdot k1,q1 \cdot k2,q1 \cdot k3…得到了每个单词的score向量(里面每一维的值就是两个单词的attention)，比如112、96，如果我们直接用和的归一化得到了每个单词的score向量(里面每一维的值就是两个单词的attention)，比如112、96，如果我们直接用和的归一化得到了每个单词的score向量(里面每一维的值就是两个单词的attention)，比如112、96，如果我们直接用和的归一化\frac{112}{112+96},,,\frac{96}{112+96}则这两个值会比较接近，如果直接送到softmax，则这两个值会比较接近，如果直接送到softmax，则这两个值会比较接近，如果直接送到softmax，\frac{e{112}}{e{112}+e{96}}$,$\frac{e{96}}{e{112}+e{96}},这两个值就会分别接近0和1了，没有区分度，所以这里我们对score向量除以一个,这两个值就会分别接近0和1了，没有区分度，所以这里我们对score向量除以一个,这两个值就会分别接近0和1了，没有区分度，所以这里我们对score向量除以一个\sqrt{d},,,d就是就是就是q 的维度（论文里是8，也就是64维度的求根值）再进行softmax，然后对第一个单词的score向量分别与的维度（论文里是8，也就是64维度的求根值）再进行softmax，然后对第一个单词的score向量分别与的维度（论文里是8，也就是64维度的求根值）再进行softmax，然后对第一个单词的score向量分别与v1,v2,v3…相乘得到相乘得到相乘得到z1，，，z1$相当于考虑了整个句子了，这个整体就是一层的encoder block 矩阵化操作 首先是矩阵化求q,k,vq,k,vq,k,v看下面图很容易理解 每个attention我们是通过q1⋅k1,q1⋅k2,q1⋅k3...q1 \cdot k1,q1 \cdot k2,q1 \cdot k3...q1⋅k1,q1⋅k2,q1⋅k3...，我们就可以个把k1,k2..k1,k2..k1,k2..堆积起来到一个矩阵和q1q1q1进行相乘得到attention向量 可以再进一步矩阵化，我们把q1,q2...q1,q2...q1,q2...也堆积起来到一个矩阵qqq 然后得到了attention score矩阵，每一个值都是两两个单词得到的attention值，除以d\sqrt{d}d​，再对每一列求softmax。 下面是对第一个单词的score向量分别与v1,v2,v3...v1,v2,v3...v1,v2,v3...相乘得到z1z1z1(图里是b1b1b1),这里把vvv堆积起来，最终得到整个self-attention layer输出O矩阵 总结起来就是： multi-head attention 每个head关注点不一样 疑惑 attention考虑到了所有两两单词，无论是邻居还是远在天涯，但这样没有考虑单词的顺序了？ 原始文章：加上位置向量，这不是学出来的参数，是人工加上的 transformer和lstm可以说是一个并列的模型，也就是一定意义上可以相互替代 原论文：https://arxiv.org/abs/1706.03762 参考文献：https://jalammar.github.io/illustrated-transformer/ 翻译：https://blog.csdn.net/longxinchen_ml/article/details/86533005 参考视频: 台大李宏毅老师-深度学习HLP]]></content>
+      <categories>
+        <category>自然语言处理</category>
+      </categories>
+      <tags>
+        <tag>transformer</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[博客美化专题]]></title>
     <url>%2F2020%2F05%2F27%2Fblog-bea%2F</url>
     <content type="text"><![CDATA[加入爱心页面 感谢这位老哥的帮助：https://wangxe.top/ 首先新建一个html的page Code1hexo new page &quot;html&quot; 修改主题的config，加入下面 将下载好的love文件夹放到\blog\source\html 修改config，跳过渲染，因为已经是html文件了，渲染是吧md文件到html： 之后的细节按照自己的需要修改爱心文件即可]]></content>
