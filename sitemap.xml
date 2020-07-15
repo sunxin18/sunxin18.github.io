@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://sunxin18.github.io/about/index.html</loc>
+    
+    <lastmod>2020-07-15T10:29:25.458Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://sunxin18.github.io/2020/05/27/blog-bea/</loc>
     
     <lastmod>2020-07-15T10:25:35.051Z</lastmod>
@@ -110,13 +117,6 @@
     <loc>https://sunxin18.github.io/2020/05/20/seq2/</loc>
     
     <lastmod>2020-05-31T10:24:14.285Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sunxin18.github.io/about/index.html</loc>
-    
-    <lastmod>2020-05-27T06:02:57.085Z</lastmod>
     
   </url>
   
