@@ -2,9 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://sunxin18.github.io/2020/10/03/effective-stl/</loc>
+    
+    <lastmod>2020-10-05T01:33:18.072Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://sunxin18.github.io/2020/09/19/DFS-hard/</loc>
     
-    <lastmod>2020-09-19T11:30:00.143Z</lastmod>
+    <lastmod>2020-09-29T02:27:41.583Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sunxin18.github.io/2020/07/18/binary-indexed-tree/</loc>
+    
+    <lastmod>2020-09-29T02:27:41.581Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sunxin18.github.io/2020/03/12/linux/</loc>
+    
+    <lastmod>2020-09-23T02:10:20.975Z</lastmod>
     
   </url>
   
@@ -30,23 +51,9 @@
   </url>
   
   <url>
-    <loc>https://sunxin18.github.io/2020/07/18/binary-indexed-tree/</loc>
-    
-    <lastmod>2020-09-19T09:11:09.111Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://sunxin18.github.io/2020/06/14/dp-hard/</loc>
     
     <lastmod>2020-08-16T11:46:55.381Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sunxin18.github.io/2020/03/12/linux/</loc>
-    
-    <lastmod>2020-08-03T11:28:16.155Z</lastmod>
     
   </url>
   
