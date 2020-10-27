@@ -173,6 +173,14 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[近似算法]]></title>
+    <url>%2F2020%2F06%2F15%2Fapp%2F</url>
+    <content type="text"><![CDATA[近似算法要求 时间：多项式时间 近似比： 常数 假设P!=NP,NP-hard组合优化问题可以按近似性分为三类： 完全可近似的，对于任意小$\varepsilon d,存在(1+d,存在(1+d,存在(1+\varepsilon $)的近似算法，比如背包问题 可近似的，存在具有常数比的近似算法，例如最小顶点覆盖，多级问题 不可近似的 不存在具有常数比的近似算法，比如货郎问题 最小顶点覆盖 Steiner tree]]></content>
+      <tags>
+        <tag>近似算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[动态规划困难问题合集]]></title>
     <url>%2F2020%2F06%2F14%2Fdp-hard%2F</url>
     <content type="text"><![CDATA[dp可以用来解决有限集合的最值问题(max,min,count…) dp问题分为两个部分 状态表示 状态计算 初始化和边界符合定义就可以 两个子序列的最大点积(190周赛) dp[i][j]的含义是到nums1[i]和nums2[j]为止的子序列的最大点积。 1.选择nums1[i]和nums2[j] 不选择前面的 dp[i][j]=nums1[i] ×\times× nums2[j] 也选择前面的 dp[i][j]=max(dp[i][j],nums1[i]×\times×nums2[j]+dp[i-1][j-1]) 因为dp[i][j]是截止到nums1[i]和nums2[j]中的最大点积，所以只需要dp[i-1][j-1]就可以了 事实上从这里可以看出想法一就是想法二的情况之一 2.选择nums1[i],不选择nums2[j] 这种情况很容易想到就用dp[i][j-1]来表示，但实际上dp[i][j-1]并不只表示这种情况，因为dp[i][j-1]表示的是到i和j-1为止的最大点击，nums[i]不一定就选，但是这个并不影响最终结果，因为我们是求最大值，当这个状态表示的集合多的时候，不会漏掉最大值的。 dp[i][j]=max(dp[i][j],dp[i][j-1]) 3.不选择nums1[i],选择nums2[j] 等价于dp[i-1][j] dp[i][j]=max(dp[i][j],dp[i-1][j]) 4.nums1[i]，nums2[i]都不选。 这种情况包括在第二三种情况了 这样会保证两个序列长度相等吗? 会的，因为每次我们选取的操作–nums1[i]×\times×nums2[j]+dp[i-1][j-1]，都是同时选取每一个序列的一个元素. 时间复杂度O(mn)O(mn)O(mn) c++123456789101112131415class Solution &#123;public: int maxDotProduct(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2) &#123; int n=nums1.size(); int m=nums2.size(); vector&lt;vector&lt;int&gt;&gt;dp(n+1,vector&lt;int&gt;(m+1,-0x3f3f3f)); for(int i=1;i&lt;n+1;i++) for(int j=1;j&lt;m+1;j++)&#123; dp[i][j]=max(dp[i-1][j],dp[i][j-1]); dp[i][j]=max(dp[i-1][j-1]+nums1[i-1]*nums2[j-1],dp[i][j]); dp[i][j]=max(nums1[i-1]*nums2[j-1],dp[i][j]); &#125; return dp[n][m]; &#125;&#125;; 最长公共子序列 c++1234567891011121314151617class Solution &#123;public: int longestCommonSubsequence(string text1, string text2) &#123; int p = text1.size(); int q = text2.size(); vector&lt;vector&lt;int&gt;&gt; dp(p+1,vector&lt;int&gt;(q+1,0)); for(int i=1;i&lt;p+1;i++) for(int j = 1;j&lt;q+1;j++) &#123; if(text1[i-1]==text2[j-1]) dp[i][j]=dp[i-1][j-1]+1; else dp[i][j]=max(dp[i-1][j],dp[i][j-1]); &#125; return dp[p][q]; &#125;&#125;; 这道题到不算dp，也是用dp的一点思想来递归。 在第一层可以摆出6个ABA类型的和6个ABC类型的涂法。对于下面每一层，每一个ABA涂法可以拼接2个ABC涂法和3个ABA涂法，每一个ABC涂法可以拼接2个ABC涂法和2个ABA涂法。这样迭代可以算出第N层有几种ABA涂法和ABC涂法，相加就是答案。 c++1234567891011121314class Solution &#123;public: int numOfWays(int n) &#123; long long aba = 6, abc = 6; const int m = pow(10,9) + 7; for(int i=1;i&lt;n;i++)&#123; int ABA,ABC; ABA=(abc*2+aba*3)%m; ABC=(abc*2+aba*2)%m; abc=ABC,aba=ABA; &#125; return (abc+aba)%m; &#125;&#125;;]]></content>
@@ -566,6 +574,14 @@
       <tags>
         <tag>线性回归</tag>
         <tag>梯度下降</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[station]]></title>
+    <url>%2F2020%2F02%2F01%2Fstation%2F</url>
+    <content type="text"><![CDATA[134.加油站 解法一：On2 c++12345678910111213141516171819202122class Solution &#123;public: int canCompleteCircuit(vector&lt;int&gt;&amp; gas, vector&lt;int&gt;&amp; cost) &#123; for(int i=0;i&lt;gas.size();i++) &#123; int sum=0; int flag=0; if(cost[i]&gt;gas[i])continue; for(int j=i;;j++) &#123; if(j==gas.size())j=0; if(j==i)flag++; //起始结束，i`j两次重合 if(flag==2)return i; //第二次回到原点 sum+=gas[j]-cost[j]; if(sum&lt;0)break; &#125; &#125; return -1; &#125;&#125;; 解法二]]></content>
+      <tags>
+        <tag>贪心算法</tag>
       </tags>
   </entry>
   <entry>
