@@ -111,6 +111,13 @@ function activateLightMode(){
 <ul>
 <li>auto自动类型推导</li>
 <li>nullptr 对之前NULL的歧义问题</li>
+<li>新增STL容器，array和tuple</li>
+<li>右值引用<br>
+形式：类型 &amp;&amp; a= 被引用的对象。与左值的区别在于：右值是临时变量，如函数返回值，且不变。右值引用可以理解为右值的引用，右值初始化后临时变量消失。<br>
+右值引用是 C++ 新标准 (C<ins>11, 11 代表 2011 年 ) 中引入的新特性 , 它实现了转移语义和精确传递。<br>
+C</ins>11 标准新特性: 右值引用与转移语义，它的主要目的有两个方面：<br>
+1.消除两个对象交互时不必要的对象拷贝，节省运算存储资源，提高效率；<br>
+2.能够更简洁明确地定义泛型函数；</li>
 </ul>
 <ol start="7">
 <li>delete 和 delete []的真正区别<br>
@@ -161,6 +168,13 @@ reinterpret_cast几乎什么都可以转，比如将int转指针，可能会出�
 类似问题的解决方法思路：首先哈希将数据分成N个文件，然后对每个文件建立K个元素最小/大堆（根据要求来选择）。最后将文件中剩余的数插入堆中，并维持K个元素的堆。最后将N个堆中的元素合起来分析。可以采用归并的方式来合并。在归并的时候为了提高效率还需要建一个N个元素构成的最大堆，先用N个堆中的最大值填充这个堆，然后就是弹出最大值，指针后移的操作了。当然这种问题在现在的互联网技术中，一般就用map-reduce框架来做了。</p>
 </li>
 </ol>
+<p>new,malloc:<br>
+new/delete是C++关键字，需要编译器支持。<br>
+malloc/free是库函数，需要头文件支持。<br>
+使用new操作符申请内存分配时无须指定内存块的大小，编译器会根据类型信息自行计算。<br>
+而malloc则需要显式地指出所需内存的尺寸。<br>
+new操作符内存分配成功时，返回的是对象类型的指针，类型严格与对象匹配，无须进行类型转换，故new是符合类型安全性的操作符。<br>
+而malloc内存分配成功则是返回void * ，需要通过强制类型转换将void * 指针转换成我们需要的类型。</p>
 <p><a href="https://www.cnblogs.com/gaoyihan/p/4723332.html" target="_blank" rel="noopener">静态链接，动态链接</a></p>
 <p><a href="https://www.cnblogs.com/danielhu83/p/7586886.html" target="_blank" rel="noopener">sizeof空类?</a><br>
 编译器会给空类实例化的对象会分配一个字节的空间作为占位符，因为每个对象都必须是唯一的，这个唯一性就由地址标识，所以，一个字节仅仅作为占位符而已，多了浪费，少了没办法标识该对象<br>
@@ -171,7 +185,8 @@ reinterpret_cast几乎什么都可以转，比如将int转指针，可能会出�
 <a href="https://blog.csdn.net/leikun153/article/details/80583009" target="_blank" rel="noopener">单例</a><br>
 <a href="https://blog.csdn.net/Si1as/article/details/52814915" target="_blank" rel="noopener">C++三个面向对象开发要素和五个原则</a><br>
 <a href="http://www.mianshigee.com/question/10195uji" target="_blank" rel="noopener">智能指针</a><br>
-<a href="https://www.jianshu.com/p/5d273e4e3cbb" target="_blank" rel="noopener">并发编程</a></p>
+<a href="https://www.jianshu.com/p/5d273e4e3cbb" target="_blank" rel="noopener">并发编程</a><br>
+<a href="https://www.cnblogs.com/songdanzju/p/7422380.html" target="_blank" rel="noopener">static</a></p>
 <h1 id="数据结构"><a class="markdownIt-Anchor" href="#数据结构"></a> 数据结构</h1>
 <p><a href="https://blog.csdn.net/random__walker/article/details/52051556" target="_blank" rel="noopener">B树与B+树的区别</a><br>
 <a href="https://www.cnblogs.com/higerMan/p/11907117.html" target="_blank" rel="noopener">哈希冲突及四种解决方法</a><br>
@@ -255,7 +270,9 @@ lsof -i:端口号</p>
 <div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">c++</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">quick_sort</span><span class="params">(<span class="keyword">int</span> q[], <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(l &gt; r)<span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">int</span> i = l - <span class="number">1</span>, j = r + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">int</span> x = q[l + r &gt;&gt; <span class="number">1</span>];</span><br><span class="line">	<span class="keyword">while</span>(i &lt; j)&#123;</span><br><span class="line">		<span class="keyword">do</span> i++; <span class="keyword">while</span>(q[i] &lt; x);</span><br><span class="line">		<span class="keyword">do</span> j--; <span class="keyword">while</span>(q[i] &gt; x);</span><br><span class="line">		swap(q[i], q[j]);</span><br><span class="line">	&#125;</span><br><span class="line">	quick_sort(q, l, j);</span><br><span class="line">	quick_sort(q, j + <span class="number">1</span>, r);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 <h1 id="操作系统"><a class="markdownIt-Anchor" href="#操作系统"></a> 操作系统</h1>
 <p><a href="https://www.cnblogs.com/fmqdblog/p/10680077.html" target="_blank" rel="noopener">进程线程通信</a><br>
-<a href="https://www.nowcoder.com/ta/review-c/review?page=82" target="_blank" rel="noopener">读写锁与互斥锁区别</a></p>
+<a href="http://blog.chinaunix.net/uid-28852942-id-3756043.html" target="_blank" rel="noopener">读写锁与互斥锁区别</a><br>
+<a href="https://blog.csdn.net/guaiguaihenguai/article/details/80303835" target="_blank" rel="noopener">死锁</a><br>
+<a href="https://www.cnblogs.com/Blog-day/p/My_Blog_Days1-11.html" target="_blank" rel="noopener">调度算法</a></p>
 </div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Sunxin</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://sunxin18.github.io/2020/07/29/job/">https://sunxin18.github.io/2020/07/29/job/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://sunxin18.github.io">lalala</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/面试/">面试    </a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/09/19/OzdFfn495PymUR1.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button button--primary button--animated"> <i class="fa fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="lazyload post-qr-code__img" src="/uploads/wechat-qcode.jpg" alt="微信"><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="lazyload post-qr-code__img" src="/uploads/zhifubao.jpg" alt="支付宝"><div class="post-qr-code__desc">支付宝</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2020/07/29/binary-tree/"><img class="prev_cover lazyload" data-src="https://i.loli.net/2020/09/19/PUbFGpT5wYrCZjf.png" onerror="onerror=null;src='/img/404.jpg'"><div class="label">上一篇</div><div class="prev_info"><span>二叉树专题</span></div></a></div><div class="next-post pull_right"><a href="/2020/07/22/double-pointer/"><img class="next_cover lazyload" data-src="https://i.loli.net/2020/09/19/uZziBhVWkj9AHa6.png" onerror="onerror=null;src='/img/404.jpg'"><div class="label">下一篇</div><div class="next_info"><span>指针专题</span></div></a></div></nav><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 评论</span></div><div id="lv-container" data-id="city" data-uid="MTAyMC80NDA0NC8yMDU3OQ"><script>(function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];
     if (typeof LivereTower === 'function') { return; }
