@@ -2,16 +2,51 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://sunxin18.github.io/2021/01/30/kill/</loc>
+    
+    <lastmod>2021-01-29T19:29:00.437Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sunxin18.github.io/2020/03/12/linux/</loc>
+    
+    <lastmod>2021-01-29T19:24:41.583Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sunxin18.github.io/2021/01/11/g/</loc>
+    
+    <lastmod>2021-01-29T19:24:06.556Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sunxin18.github.io/2020/11/18/ros/</loc>
+    
+    <lastmod>2021-01-29T19:23:48.347Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sunxin18.github.io/2020/11/05/quick-sort/</loc>
+    
+    <lastmod>2021-01-29T19:23:39.277Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://sunxin18.github.io/2020/12/30/protobuf/</loc>
     
-    <lastmod>2020-12-30T12:32:28.485Z</lastmod>
+    <lastmod>2021-01-29T19:23:11.760Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://sunxin18.github.io/2020/12/05/git/</loc>
     
-    <lastmod>2020-12-30T12:19:03.784Z</lastmod>
+    <lastmod>2020-12-31T10:25:34.881Z</lastmod>
     
   </url>
   
@@ -19,20 +54,6 @@
     <loc>https://sunxin18.github.io/2020/12/20/gdb/</loc>
     
     <lastmod>2020-12-30T08:01:09.797Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sunxin18.github.io/2020/11/18/ros/</loc>
-    
-    <lastmod>2020-11-19T03:29:04.109Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sunxin18.github.io/2020/11/05/quick-sort/</loc>
-    
-    <lastmod>2020-11-19T03:26:20.272Z</lastmod>
     
   </url>
   
@@ -110,13 +131,6 @@
     <loc>https://sunxin18.github.io/2020/07/18/binary-indexed-tree/</loc>
     
     <lastmod>2020-09-29T02:27:41.581Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sunxin18.github.io/2020/03/12/linux/</loc>
-    
-    <lastmod>2020-09-23T02:10:20.975Z</lastmod>
     
   </url>
   
