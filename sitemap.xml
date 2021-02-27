@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://sunxin18.github.io/2021/02/27/cmake/</loc>
+    
+    <lastmod>2021-02-27T10:15:49.018Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sunxin18.github.io/2020/02/03/C/</loc>
+    
+    <lastmod>2021-02-22T04:02:39.681Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://sunxin18.github.io/2021/01/30/kill/</loc>
     
-    <lastmod>2021-01-29T19:29:00.437Z</lastmod>
+    <lastmod>2021-01-29T19:33:19.332Z</lastmod>
     
   </url>
   
@@ -208,13 +222,6 @@
     <loc>https://sunxin18.github.io/2020/05/08/bert/</loc>
     
     <lastmod>2020-06-29T01:35:48.793Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sunxin18.github.io/2020/02/03/C/</loc>
-    
-    <lastmod>2020-06-24T13:23:40.424Z</lastmod>
     
   </url>
   

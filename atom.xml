@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://sunxin18.github.io/"/>
-  <updated>2021-01-29T19:29:00.437Z</updated>
+  <updated>2021-02-27T10:15:49.018Z</updated>
   <id>https://sunxin18.github.io/</id>
   
   <author>
@@ -17,13 +17,36 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>cmake报错以及解决办法集</title>
+    <link href="https://sunxin18.github.io/2021/02/27/cmake/"/>
+    <id>https://sunxin18.github.io/2021/02/27/cmake/</id>
+    <published>2021-02-27T09:38:38.000Z</published>
+    <updated>2021-02-27T10:15:49.018Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="1"><a class="markdownIt-Anchor" href="#1"></a> 1</h1><p>报错内容：<br><a href="/2021/02/27/cmake/1.png" data-fancybox="group" data-caption class="fancybox"><img src="/2021/02/27/cmake/1.png" alt title></a><br>报错的代码</p><div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">Code</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">83:install(</span><br><span class="line">84:    TARGETS $&#123;TARGET&#125;</span><br><span class="line">85:    ARCHIVE DESTINATION $&#123;CMAKE_INSTALL_LIBDIR&#125;</span><br><span class="line">86:    LIBRARY DESTINATION $&#123;CMAKE_INSTALL_LIBDIR&#125;</span><br></pre></td></tr></table></figure></div><p>可以看到报错的区域出现在make install 部分，报错信息提示是没有给出install的位置，接下来发现${CMAKE_INSTALL_LIBDIR}是空的。<br>解决方法:CMakeLists中加入include(GNUInstallDirs)</p><h1 id="2-cannot-find-lxxxx"><a class="markdownIt-Anchor" href="#2-cannot-find-lxxxx"></a> 2 cannot find -lxxxx</h1><p>这种情况最可能的原因是链接库连接错了，<a href="http://xn--xxx-5y9fz0w.so" target="_blank" rel="noopener">没有xxx.so</a></p><h1 id="3-install后cannot-open-xxxsono-file-or-directory"><a class="markdownIt-Anchor" href="#3-install后cannot-open-xxxsono-file-or-directory"></a> 3. install后，cannot open <a href="http://xxx.so" target="_blank" rel="noopener">xxx.so</a>:No file or directory</h1><p><a href="/2021/02/27/cmake/2.png" data-fancybox="group" data-caption class="fancybox"><img src="/2021/02/27/cmake/2.png" alt title></a><br>首先检查是不是xxx.so没有生成，进入到lib目录<br><a href="/2021/02/27/cmake/3.png" data-fancybox="group" data-caption class="fancybox"><img src="/2021/02/27/cmake/3.png" alt title></a><br>发现果然没有生成，这一部分属于算法部分的，所以检查cmakelist相应的部分，果然代码生成的不全</p><div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">python</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#原始： </span></span><br><span class="line"> install(FILES $&#123;binary_dir&#125;/install/lib/libperception_fusion.so</span><br><span class="line">    DESTINATION lib</span><br><span class="line"><span class="comment">#改完：</span></span><br><span class="line"> install(DIRECTORY $&#123;binary_dir&#125;/install/lib/</span><br><span class="line">    DESTINATION lib</span><br><span class="line">    FILES_MATCHING PATTERN <span class="string">"*.so"</span></span><br></pre></td></tr></table></figure></div><p>结果发现又出现同样的报错了，其他的动态库又找不到了，首先看下要生成的动态库<br><a href="/2021/02/27/cmake/4.png" data-fancybox="group" data-caption class="fancybox"><img src="/2021/02/27/cmake/4.png" alt title></a><br>发现还有后缀是.so.xx<br>所以再改写一下cmake</p><div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">python</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">install(DIRECTORY $&#123;binary_dir&#125;/install/lib/</span><br><span class="line">   DESTINATION lib</span><br><span class="line">   FILES_MATCHING PATTERN <span class="string">"*.so"</span></span><br></pre></td></tr></table></figure></div><p>Over!</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+      
+    
+    </summary>
+    
+    
+      <category term="CMake" scheme="https://sunxin18.github.io/tags/CMake/"/>
+    
+  </entry>
+  
+  <entry>
     <title>杀掉指定进程名的进程</title>
     <link href="https://sunxin18.github.io/2021/01/30/kill/"/>
     <id>https://sunxin18.github.io/2021/01/30/kill/</id>
     <published>2021-01-29T19:19:00.000Z</published>
-    <updated>2021-01-29T19:29:00.437Z</updated>
+    <updated>2021-01-29T19:33:19.332Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>场景是要杀掉服务器上的一个进程并且不知道进程号，所以我们现在本地查一下进程名，在服务器和本地进程名都是一样的</p><h2 id="首先在本地查一下进程号"><a class="markdownIt-Anchor" href="#首先在本地查一下进程号"></a> 首先在本地查一下进程号：</h2><p><a href="/2021/01/30/kill/1.png" data-fancybox="group" data-caption class="fancybox"><img src="/2021/01/30/kill/1.png" alt title></a></p><h2 id="查进程名"><a class="markdownIt-Anchor" href="#查进程名"></a> 查进程名：</h2><p>命令：</p><div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">Code</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -aux |grep -v grep|grep ID</span><br></pre></td></tr></table></figure></div><p><a href="/2021/01/30/kill/2.png" data-fancybox="group" data-caption class="fancybox"><img src="/2021/01/30/kill/2.png" alt title></a><br>看到进程名字是&quot;lidarperception_ros2mfr_adaptor&quot;</p><h2 id="杀掉进程"><a class="markdownIt-Anchor" href="#杀掉进程"></a> 杀掉进程</h2><div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">Code</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pkill -f &quot;lidarperception_ros2mfr_adaptor&quot;</span><br></pre></td></tr></table></figure></div><p><a href="/2021/01/30/kill/3.png" data-fancybox="group" data-caption class="fancybox"><img src="/2021/01/30/kill/3.png" alt title></a></p>]]></content>
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>场景是要杀掉服务器上的一个进程并且不知道进程号，所以我们现在本地查一下进程名，在服务器和本地进程名都是一样的</p><h2 id="首先在本地查一下进程号"><a class="markdownIt-Anchor" href="#首先在本地查一下进程号"></a> 首先在本地查一下进程号：</h2><p><a href="/2021/01/30/kill/2.png" data-fancybox="group" data-caption class="fancybox"><img src="/2021/01/30/kill/2.png" alt title></a></p><h2 id="查进程名"><a class="markdownIt-Anchor" href="#查进程名"></a> 查进程名：</h2><p>命令：</p><div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">Code</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -aux |grep -v grep|grep ID</span><br></pre></td></tr></table></figure></div><p><a href="/2021/01/30/kill/1.png" data-fancybox="group" data-caption class="fancybox"><img src="/2021/01/30/kill/1.png" alt title></a><br>看到进程名字是&quot;lidarperception_ros2mfr_adaptor&quot;</p><h2 id="杀掉进程"><a class="markdownIt-Anchor" href="#杀掉进程"></a> 杀掉进程</h2><div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">Code</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pkill -f &quot;lidarperception_ros2mfr_adaptor&quot;</span><br></pre></td></tr></table></figure></div><p><a href="/2021/01/30/kill/3.png" data-fancybox="group" data-caption class="fancybox"><img src="/2021/01/30/kill/3.png" alt title></a></p>]]></content>
     
     <summary type="html">
     
@@ -459,31 +482,6 @@
     
     
       <category term="动态规划" scheme="https://sunxin18.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>博客美化专题</title>
-    <link href="https://sunxin18.github.io/2020/05/27/blog-bea/"/>
-    <id>https://sunxin18.github.io/2020/05/27/blog-bea/</id>
-    <published>2020-05-27T03:53:30.000Z</published>
-    <updated>2020-07-15T10:25:35.051Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="加入爱心页面"><a class="markdownIt-Anchor" href="#加入爱心页面"></a> 加入爱心页面</h1><p>首先新建一个html的page</p><div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">Code</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page &quot;html&quot;</span><br></pre></td></tr></table></figure></div><p>修改主题的config，加入下面<br><a href="/2020/05/27/blog-bea/1.png" data-fancybox="group" data-caption class="fancybox"><img src="/2020/05/27/blog-bea/1.png" alt title></a><br>将下载好的love文件夹放到\blog\source\html<br>修改config，跳过渲染，因为已经是html文件了，渲染是吧md文件到html：<br><a href="/2020/05/27/blog-bea/2.png" data-fancybox="group" data-caption class="fancybox"><img src="/2020/05/27/blog-bea/2.png" alt title></a></p><p>之后的细节按照自己的需要修改爱心文件即可</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
-      
-    
-    </summary>
-    
-      <category term="博客" scheme="https://sunxin18.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
-    
-    
-      <category term="博客美化专题" scheme="https://sunxin18.github.io/tags/%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96%E4%B8%93%E9%A2%98/"/>
     
   </entry>
   
