@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[418]]></title>
+    <url>%2F2021%2F04%2F18%2F418%2F</url>
+    <content type="text"><![CDATA[题目地址：https://leetcode-cn.com/problems/contains-duplicate-iii/ 由于要判断的两个数的下标的距离小于k，很容易想到使用滑动窗口，对每个窗口内的数进行判断，然后移动窗口，复杂度就是O(kn)O(kn)O(kn)，这会超出时间限制 因此降低复杂度就要从滑动窗口入手，使用一种数据结构可以满足一下几点 能够用更短的时间判断 还可以动态维护，即进行插入删除 想到使用 set 来维护，set可以自动对滑动窗口内的数进行排序，总体复杂度O(logkn)O(log_{k}n)O(logk​n) 设窗口又端点的数为x，使用lower_bound 函数找到窗口内最小的一个大于等于x-t的数，如果这个数也小于等于x+t，那么就找到了这一对数。 c++123456789101112131415class Solution &#123;public: bool containsNearbyAlmostDuplicate(vector&lt;int&gt;&amp; nums, int k, int t) &#123; set&lt;long&gt; st; for (int i = 0; i &lt; nums.size(); i++) &#123; auto iter = st.lower_bound((long)nums[i] - t); if (iter != st.end() &amp;&amp; *iter &lt;= (long)nums[i] + t) return true; st.insert(nums[i]); if (st.size() &gt; k) st.erase(nums[i - k]); &#125; return false; &#125;&#125;; 使用set仍然无法达到线性时间，我们可以使用桶排序在O(1)的时候进行类似窗口内判断的操作。 我们将桶的大小设为t+1(因为判断的两个数的差小于等于t，那么桶里放t+1个数就一个都不会漏了)。如果两个元素同属一个桶，那么这两个元素必然符合条件。如果两个元素属于相邻桶，那么我们需要校验这两个元素是否差值不超过 t。如果两个元素既不属于同一个桶，也不属于相邻桶，那么这两个元素必然不符合条件。 难点在于怎么给桶编号，如果是非负数，那么id就是x/t+1, 可以看下这个题解：https://leetcode-cn.com/problems/contains-duplicate-iii/solution/c-li-yong-tong-fen-zu-xiang-xi-jie-shi-b-ofj6/ c++12345678910111213141516171819202122class Solution &#123;public: int getID (long x, long t) &#123; return x &gt;= 0 ? x / (t + 1) : (x + 1) / (t + 1) - 1; &#125; bool containsNearbyAlmostDuplicate(vector&lt;int&gt;&amp; nums, int k, int t) &#123; unordered_map &lt;long, long&gt; map;//由于桶如果有两个相同的就满足返回true了，所以每个桶里最多放一个元素，使用map就合适 for (int i = 0; i &lt; nums.size(); i++) &#123; int id = getID(nums[i], t); if (map.find(id) != map.end()) return true; int l = id - 1; int r = id + 1; if (map.find(l) != map.end() &amp;&amp; nums[i] - map[l] &lt;= t) return true; if (map.find(r) != map.end() &amp;&amp; map[r] - nums[i] &lt;= t) return true; map[id] = nums[i]; if(i - k &gt;= 0) &#123; map.erase(getID(nums[i - k], t)); &#125; &#125; return false; &#125;&#125;;]]></content>
+      <categories>
+        <category>算法编程</category>
+      </categories>
+      <tags>
+        <tag>桶排序</tag>
+        <tag>滑动窗口</tag>
+        <tag>复杂度优化</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[cmake报错以及解决办法集]]></title>
     <url>%2F2021%2F02%2F27%2Fcmake%2F</url>
     <content type="text"><![CDATA[1 报错内容： 报错的代码 Code123483:install(84: TARGETS $&#123;TARGET&#125;85: ARCHIVE DESTINATION $&#123;CMAKE_INSTALL_LIBDIR&#125;86: LIBRARY DESTINATION $&#123;CMAKE_INSTALL_LIBDIR&#125; 可以看到报错的区域出现在make install 部分，报错信息提示是没有给出install的位置，接下来发现${CMAKE_INSTALL_LIBDIR}是空的。 解决方法:CMakeLists中加入include(GNUInstallDirs) 2 cannot find -lxxxx 这种情况最可能的原因是链接库连接错了，没有xxx.so 3. install后，cannot open xxx.so:No file or directory 首先检查是不是xxx.so没有生成，进入到lib目录 发现果然没有生成，这一部分属于算法部分的，所以检查cmakelist相应的部分，果然代码生成的不全 python1234567#原始： install(FILES $&#123;binary_dir&#125;/install/lib/libperception_fusion.so DESTINATION lib#改完： install(DIRECTORY $&#123;binary_dir&#125;/install/lib/ DESTINATION lib FILES_MATCHING PATTERN "*.so" 结果发现又出现同样的报错了，其他的动态库又找不到了，首先看下要生成的动态库 发现还有后缀是.so.xx 所以再改写一下cmake python123install(DIRECTORY $&#123;binary_dir&#125;/install/lib/ DESTINATION lib FILES_MATCHING PATTERN "*.so" Over!]]></content>
