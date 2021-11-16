@@ -98,14 +98,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[protobuf]]></title>
-    <url>%2F2020%2F12%2F30%2Fprotobuf%2F</url>
-    <content type="text"><![CDATA[将lidar模块的protobuf升级到3.12后，遇到了这么个报错 结果花了三天的时间在这上面，最开始排查的方向错了导致无意义的时间花销，所以遇到问题首先要却定好大方向，在去深入。 先看一下出错区域的代码，这里是publish一个string消息 c++12345678910mmessage::std_mfrmsgs::MFRMessageString msg;msg.set_data(to_protobuf_string(prediction).c_str());mfr_publisher_map_[global_lidar_visualization_topic]-&gt;publish(msg);std::string to_protobuf_string(const LidarPrediction::Ptr &amp;prediction) &#123; proto::LidarPrediction data; ........ return data.SerializeAsString();&#125; 首先我理所当然的以为是升级接口的改变，也就是to_protobuf_string()这里的的改变，就去看了一下生成的消息接口，结果还真有一些我以为是新升级的接口，实际上不是，现在想想3.9-&gt;3.12的一个小升级不会有这种改变。。。然后重新用新的接口写了一下，实际对于proto消息内的repeated字段，有两种增加新内容的方法， c++12auto p = x-&gt;Add();auto p = x.add_xx(); 我只在接口的代码里看到了第二个就以为是更新了. 然后又跳入了第二个坑，以为是调用c_str后，传入const * char因为没有传入长度而出现截断，序列化后有许多的0感觉会这样，结果实际上并不会这个并没有理论依据，不能总是用以为做事， 最终的问题是在与当publish的时候又会进行一个序列化，两次都是才用的protobuf，连续两次序列化出的问题， protobuf会对string进行utf-8检查，然而如果根据报错提示换用bytes的话，这就要对publish底层的protbuf源码来操作，不现实，所以讲方向放到第一次序列化，我们换个结构不用string来存不就好了吗？用uint8[] 重新定义一个消息，结构就是uint8数组。 c++12345678910111213141516171819mmessage::std_mfrmsgs::MFRMessageUInt8MultiArray msg; size_t length = 0; uint8_t *buf = to_protobuf_array(prediction, length); for(int i = 0; i &lt; length; i++) &#123; msg.add_data(buf[i]); &#125; mfr_publisher_map_[global_lidar_visualization_topic]-&gt;publish(msg);uint8_t * to_protobuf_array(const LidarPrediction::Ptr &amp;prediction, size_t &amp;len) &#123; proto::LidarPrediction data; ....... uint32_t length = data.ByteSizeLong(); uint8_t * buf = new uint8_t[length]; data.SerializeToArray(buf,length); len = length; return buf;&#125; 但是如果对数组序列化的话，调用的是SerializeToArray(), 这里还需要传入大小，由于对于uint_8* 是无法获取数组的大小的(sizeof得到的指针的size), 所以我们需要吧这个信息写进消息里，随便测试了一下某个bag序列化后的size是4000000，感觉32位就够用了，所以我们把数组前四个一共32位拿来存序列化后的大小信息。 将表示size的32位数转化到unit8数组 c++123456void inttolitend(uint32_t x, uint8_t * &amp;lit_int) &#123; lit_int[0] = (uint8_t)(x &gt;&gt; 0); lit_int[1] = (uint8_t)(x &gt;&gt; 8); lit_int[2] = (uint8_t)(x &gt;&gt; 16); lit_int[3] = (uint8_t)(x &gt;&gt; 24);&#125; 转化回来 c++1uint32_t length = buf[0] | (buf[1] &lt;&lt; 8) | (buf[2] &lt;&lt; 16) | (buf[3] &lt;&lt; 24);]]></content>
-      <tags>
-        <tag>protobuf</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[gdb来检查播bag测试的崩溃]]></title>
     <url>%2F2020%2F12%2F20%2Fgdb%2F</url>
     <content type="text"><![CDATA[本地播bag测试时，出现了崩溃，如下 首先我们先找到coredump文件，在Downloads/coredump目录下，然后我们根据时间找到对应的文件core.xxxx记住这个名字,发现是我负责的lidar模块的错误 进入到catkin_ws/devel/lib/lidar_perception目录,此目录下有个lidar_perception_mfr_node,此时我们通过gdb来看一下报错原因 Code1gdb lidar_perception_mfr_node ~/Downloads/coredump/core.xxx 然后输入bt看一下堆栈信息 可以发现问题是说有个地方的protobuf的版本不匹配。]]></content>
