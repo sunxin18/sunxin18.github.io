@@ -68,14 +68,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[cmake报错以及解决办法集]]></title>
-    <url>%2F2021%2F02%2F27%2Fcmake%2F</url>
-    <content type="text"><![CDATA[1 报错内容： 报错的代码 Code123483:install(84: TARGETS $&#123;TARGET&#125;85: ARCHIVE DESTINATION $&#123;CMAKE_INSTALL_LIBDIR&#125;86: LIBRARY DESTINATION $&#123;CMAKE_INSTALL_LIBDIR&#125; 可以看到报错的区域出现在make install 部分，报错信息提示是没有给出install的位置，接下来发现${CMAKE_INSTALL_LIBDIR}是空的。 解决方法:CMakeLists中加入include(GNUInstallDirs) 2 cannot find -lxxxx 这种情况最可能的原因是链接库连接错了，没有xxx.so 3. install后，cannot open xxx.so:No file or directory 首先检查是不是xxx.so没有生成，进入到lib目录 发现果然没有生成，这一部分属于算法部分的，所以检查cmakelist相应的部分，果然代码生成的不全 python1234567#原始： install(FILES $&#123;binary_dir&#125;/install/lib/libperception_fusion.so DESTINATION lib#改完： install(DIRECTORY $&#123;binary_dir&#125;/install/lib/ DESTINATION lib FILES_MATCHING PATTERN "*.so" 结果发现又出现同样的报错了，其他的动态库又找不到了，首先看下要生成的动态库 发现还有后缀是.so.xx 所以再改写一下cmake python123install(DIRECTORY $&#123;binary_dir&#125;/install/lib/ DESTINATION lib FILES_MATCHING PATTERN "*.so" Over!]]></content>
-      <tags>
-        <tag>CMake</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[杀掉指定进程名的进程]]></title>
     <url>%2F2021%2F01%2F30%2Fkill%2F</url>
     <content type="text"><![CDATA[场景是要杀掉服务器上的一个进程并且不知道进程号，所以我们现在本地查一下进程名，在服务器和本地进程名都是一样的 首先在本地查一下进程号： 查进程名： 命令： Code1ps -aux |grep -v grep|grep ID 看到进程名字是&quot;lidarperception_ros2mfr_adaptor&quot; 杀掉进程 Code1pkill -f &quot;lidarperception_ros2mfr_adaptor&quot;]]></content>
